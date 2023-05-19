@@ -2,8 +2,13 @@
 
 class UsuarioDTO{
     private $id_usuario;
-    private $nome;
-    private $cpf_cnpj;
+    private $nome_usu;
+    private $email;
+    private $senha;
+    private $cpf;
+    private $telefone;
+    private $sexo;
+    private $dt_nascimento;
     private $endereco;
     private $numero;
     private $complemento;
@@ -11,15 +16,13 @@ class UsuarioDTO{
     private $cidade;
     private $uf;
     private $cep;
-    private $loginEmail;
-    private $senha;
-    private $perfil;
     private $situacao;
+    private $id_perfil;
 
     //construtor
-    public function __construct($nome, $loginEmail,$senha){
-        $this->nome = $nome;
-        $this->loginEmail = $loginEmail;
+    public function __construct($nome_usu, $email,$senha){
+        $this->nome_usu = $nome_usu;
+        $this->email = $email;
         $this->senha = $senha;
     }
 
@@ -44,43 +47,129 @@ class UsuarioDTO{
     }
 
     /**
-     * Pegar o valor de nome
+     * Pegar o valor de nome_usu
      */ 
-    public function getNome(){
-        return $this->nome;
+    public function getNome_usu(){
+        return $this->nome_usu;
     }
 
     /**
-     * Defina o valor de nome
+     * Defina o valor de nome_usu
      *
      * @return  self
      */ 
-    public function setNome($nome)
+    public function setNome_usu($nome_usu)
     {
-        $this->nome = ucwords(trim($nome));
+        $this->nome_usu = ucwords(trim($nome_usu));
 
         return $this;
     }
 
     /**
-     * Pegar o valor de cpf_cnpj
+     * Pegar o valor de email
      */ 
-
-    public function getCpf_cnpj(){
-        return $this->cpf_cnpj;
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
-     * Defina o valor de cpf_cnpj
+     * Defina o valor de email
      *
      * @return  self
      */ 
-    public function setCpf_cnpj($cpf_cnpj)
+    public function setEmail($email)
     {
-        $this->cpf_cnpj = $cpf_cnpj;
+        $this->email = strtolower(trim($email));
 
         return $this;
     }
+
+    /**
+     * Pegar o valor de senha
+     */ 
+    public function getSenha()
+    {
+        return $this->senha;
+    }
+
+    /**
+     * Defina o valor de senha
+     *
+     * @return  self
+     */ 
+    public function setSenha($senha)
+    {
+        $this->senha = strtolower(trim($senha));
+
+        return $this;
+    }
+
+    /**
+     * Pegar o valor de cpf
+     */ 
+
+    public function getCpf(){
+        return $this->cpf;
+    }
+
+    /**
+     * Defina o valor de cpf
+     *
+     * @return  self
+     */     
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+
+        return $this;
+    }
+
+    /**
+     * Pegar o valor de telefone
+     */ 
+
+    public function getTelefone(){
+        return $this->telefone;
+    }
+    /**
+     * Defina o valor de telefone
+     *
+     * @return  self
+     */     
+    public function setTelefone($telefone){
+        $this->telefone = $telefone;
+    }
+
+    /**
+     * Pegar o valor de sexo
+     */ 
+    public function getSexo(){
+        return $this->sexo;
+    }
+    /**
+     * Defina o valor de telefone
+     *
+     * @return  self
+     */  
+    public function setSexo($sexo){
+        $this->sexo = $sexo;
+    }   
+
+    /**
+     * Pegar o valor de dt_nascimento
+     */ 
+    public function getDt_nascimento(){
+        return $this->dt_nascimento;
+    }
+    /**
+     * Defina o valor de dt_nascimento
+     *
+     * @return  self
+     */ 
+    public function setDt_nascimento($dt_nascimento){
+        $this->dt_nascimento = $dt_nascimento;
+    } 
 
     /**
      * Pegar o valor de endereco
@@ -223,66 +312,6 @@ class UsuarioDTO{
     }
 
     /**
-     * Pegar o valor de loginEmail
-     */ 
-    public function getLoginEmail()
-    {
-        return $this->loginEmail;
-    }
-
-    /**
-     * Defina o valor de loginEmail
-     *
-     * @return  self
-     */ 
-    public function setLoginEmail($loginEmail)
-    {
-        $this->loginEmail = strtolower(trim($loginEmail));
-
-        return $this;
-    }
-
-    /**
-     * Pegar o valor de senha
-     */ 
-    public function getSenha()
-    {
-        return $this->senha;
-    }
-
-    /**
-     * Defina o valor de senha
-     *
-     * @return  self
-     */ 
-    public function setSenha($senha)
-    {
-        $this->senha = strtolower(trim($senha));
-
-        return $this;
-    }
-
-    /**
-     * Pegar o valor de perfil
-     */ 
-    public function getPerfil()
-    {
-        return $this->perfil;
-    }
-
-    /**
-     * Defina o valor de perfil
-     *
-     * @return  self
-     */ 
-    public function setPerfil($perfil)
-    {
-        $this->perfil = trim($perfil);
-
-        return $this;
-    }
-
-    /**
      * Pegar o valor de situacao
      */ 
 
@@ -298,6 +327,22 @@ class UsuarioDTO{
     public function setSituacao($situacao)
     {
         $this->situacao = $situacao;
+
+        return $this;
+    }
+
+    public function getId_perfil(){
+        return $this->id_perfil;
+    }
+
+    /**
+     * Defina o valor de id_perfil
+     *
+     * @return  self
+     */ 
+    public function setId_perfil($id_perfil)
+    {
+        $this->id_perfil = $id_perfil;
 
         return $this;
     }
