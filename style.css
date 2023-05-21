@@ -1,0 +1,132 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #002b46;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 2em;
+  color: #E0E0F8;
+}
+
+#container {
+  border: 3px solid #085178d4;
+  box-shadow: 0 0.1rem 0.8rem rgba(0, 0, 0, 0.8);
+  border-color: #085178d4;
+  background: #77A1D3;
+  padding: 0 0 3em 0;
+  margin: 3em 5em;
+}
+
+form {
+  margin: 4em 1em 0 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  font-size: large;
+}
+
+fieldset {
+  border: 0;
+}
+
+.field {
+  margin-bottom: 1em;
+  width: 50%;
+}
+
+.field input[type="text"],
+.field input[type="email"],
+.field input[type="tel"],
+.field input[type="number"],
+.field input[type="date"],
+.field select,
+.field textarea {
+  padding: 0.2em;
+  border: 1px solid #59429d;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  width: 20em;
+}
+
+.field select option {
+  padding-right: 1em;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  background: #E0E0F8;
+}
+
+.botao {
+  font-size: 1.5em;
+  background: #59429d;
+  border: 0;
+  margin-bottom: 1.2em;
+  color: #ffffff;
+  padding: 0.2em 0.6em;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  top: 95%;
+  left: 50%;
+}
+
+.botao:hover {
+  background: #CCBBFF;
+  box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: none;
+}
+
+.botao,
+select {
+  cursor: pointer;
+}
+
+/* Responsive CSS */
+@media screen and (max-width: 768px) {
+  form {
+    margin: 4em 0.5em 0 0.5em;
+  }
+
+  .field {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* Login */
+
+body{
+position: relative;
+}
+
+.img-wrapper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.5;
+  animation: zoom 15s;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
