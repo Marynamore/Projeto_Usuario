@@ -17,6 +17,7 @@ class UsuarioDTO{
     private $uf;
     private $cep;
     private $situacao;
+    private $foto;
     private $id_perfil;
 
     //construtor
@@ -170,6 +171,21 @@ class UsuarioDTO{
     public function setDt_nascimento($dt_nascimento){
         $this->dt_nascimento = $dt_nascimento;
     } 
+
+    /**
+     * Pegar o valor de endereco
+     */ 
+    public function getFoto(){
+        return $this->foto;
+    }
+    /**
+     * Defina o valor de dt_nascimento
+     *
+     * @return  self
+     */
+    public function setFoto($foto){
+        $this->foto = $foto;
+    }    
 
     /**
      * Pegar o valor de endereco

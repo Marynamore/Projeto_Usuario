@@ -12,11 +12,13 @@ require_once '../model/usuarioDAO.php';
 $nome           = strip_tags($_POST["nome_usu"]);
 $cpf            = strip_tags($_POST["cpf"]);
 $telefone = strip_tags($_POST["telefone"]);
+
 if(isset($_POST["sexo"])){
     $sexo = strip_tags($_POST["sexo"]);
 } else {
 $sexo = "";
 }   
+
 $dt_nascimento  = $_POST["dt_nascimento"];
 $endereco       = strip_tags($_POST["endereco"]);
 $numero         = strip_tags($_POST["numero"]);
@@ -29,6 +31,14 @@ $email          = strip_tags($_POST["email"]);
 $senha          = $_POST["senha"];
 $situacao       = $_POST["situacao"];
 $id_perfil         = $_POST["id_perfil"];
+$foto = $_FILES['foto'];
+
+// Verifica se o campo de upload de arquivo foi enviado e se não há erros
+if ($foto['error'] === UPLOAD_ERR_OK){
+    $nome_arquivo = $foto['name'];
+    $caminho_temporario = $foto['tmp_name'];
+    $caminho_destino = '../assets/pessoas/' . $nome_arquivo;
+    move_uploaded_file($caminho_temporario, $caminho_destino);
 
 $usuarioDTO = new UsuarioDTO($nome,$email,$senha);  
 $usuarioDTO->setNome_usu($nome);
@@ -44,6 +54,7 @@ $usuarioDTO->setBairro($bairro);
 $usuarioDTO->setCidade($cidade);
 $usuarioDTO->setUF($uf);
 $usuarioDTO->setCep($cep);
+$usuarioDTO->setFoto($nome_arquivo);
 $usuarioDTO->setEmail($email);
 $usuarioDTO->setSenha($senha);
 $usuarioDTO->setSituacao($situacao);
@@ -67,5 +78,5 @@ if($usuarioCadastrado){
     echo "</script> ";
     //header("location:../visao/registro.php?msg=Erro");
 }
- 
+}
 ?>

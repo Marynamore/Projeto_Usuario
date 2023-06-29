@@ -13,6 +13,7 @@ class UsuarioDAO{
         $this->pdo = Conexao::getInstance();
     }
 
+    //Função de logan no sistema
     public function logarEmail($email, $senha){
         try{
             $sql = "SELECT u.id_usuario,u.nome_usu,u.email,u.senha,u.id_perfil,p.nome_perfil FROM usuario u INNER JOIN perfil_usu p ON u.id_perfil = p.id_perfil WHERE email=? AND senha=?";
@@ -31,25 +32,26 @@ class UsuarioDAO{
 
     public function cadastrarUsuario(UsuarioDTO $usuarioDTO) {
         try {
-            $sql = "INSERT INTO usuario (nome_usu, email, senha, cpf, telefone, sexo, dt_nascimento, endereco, numero, complemento, bairro, cidade, uf, cep,  id_perfil, situacao) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO usuario (nome_usu, email, senha, cpf, telefone, sexo, dt_nascimento, endereco, numero, complemento, bairro, cidade, uf, cep,  id_perfil, situacao,foto) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $stmt = $this->pdo->prepare($sql); //prepara sql a ser executada
-            $stmt->bindValue(1,$usuarioDTO->getNome_usu()); //associa o valor senha a 1a interrogação
-            $stmt->bindValue(2,$usuarioDTO->getEmail()); //associa o valor senha a 2a interrogação
+            $stmt->bindValue(1,$usuarioDTO->getNome_usu()); //associa o valor nome usuario a 1a interrogação
+            $stmt->bindValue(2,$usuarioDTO->getEmail()); //associa o valor email a 2a interrogação
             $stmt->bindValue(3,$usuarioDTO->getSenha()); //associa o valor senha a 3a interrogação
-            $stmt->bindValue(2, $usuarioDTO->getCpf()); //associa o valor senha a 2a interrogação
-            $stmt->bindValue(4, $usuarioDTO->getTelefone()); //associa o valor senha a 4a interrogação
-            $stmt->bindValue(5, $usuarioDTO->getSexo()); //associa o valor senha a 5a interrogação
-            $stmt->bindValue(6, $usuarioDTO->getDt_nascimento()); //associa o valor senha a 6a interrogação
-            $stmt->bindValue(7,$usuarioDTO->getEndereco()); //associa o valor senha a 7a interrogação
+            $stmt->bindValue(2, $usuarioDTO->getCpf()); //associa o valor cpf a 2a interrogação
+            $stmt->bindValue(4, $usuarioDTO->getTelefone()); //associa o valor telefone a 4a interrogação
+            $stmt->bindValue(5, $usuarioDTO->getSexo()); //associa o valor sexo a 5a interrogação
+            $stmt->bindValue(6, $usuarioDTO->getDt_nascimento()); //associa o valor data de nascimento a 6a interrogação
+            $stmt->bindValue(7,$usuarioDTO->getEndereco()); //associa o valor endereço a 7a interrogação
             $stmt->bindValue(8,$usuarioDTO->getNumero()); //associa o valor senha a 8a interrogação
-            $stmt->bindValue(9,$usuarioDTO->getComplemento()); //associa o valor senha a 9a interrogação
-            $stmt->bindValue(10,$usuarioDTO->getBairro()); //associa o valor senha a 10a interrogação
-            $stmt->bindValue(11,$usuarioDTO->getCidade()); //associa o valor senha a 11a interrogação
-            $stmt->bindValue(12,$usuarioDTO->getUf()); //associa o valor senha a 12a interrogação
-            $stmt->bindValue(13,$usuarioDTO->getCep()); //associa o valor senha a 13a interrogação
-            $stmt->bindValue(14,$usuarioDTO->getId_Perfil()); //associa o valor senha a 14a interrogação
-            $stmt->bindValue(15,$usuarioDTO->getSituacao()); //associa o valor senha a 15a interrogação
-        
+            $stmt->bindValue(9,$usuarioDTO->getComplemento()); //associa o valor complemento a 9a interrogação
+            $stmt->bindValue(10,$usuarioDTO->getBairro()); //associa o valor bairro a 10a interrogação
+            $stmt->bindValue(11,$usuarioDTO->getCidade()); //associa o valor cidade a 11a interrogação
+            $stmt->bindValue(12,$usuarioDTO->getUf()); //associa o valor uf a 12a interrogação
+            $stmt->bindValue(13,$usuarioDTO->getCep()); //associa o valor cep a 13a interrogação
+            $stmt->bindValue(14,$usuarioDTO->getId_Perfil()); //associa o valor id_perfil a 14a interrogação
+            $stmt->bindValue(15,$usuarioDTO->getSituacao()); //associa o valor situação a 15a interrogação
+            $stmt->bindValue(16,$usuarioDTO->getFoto()); //associa o valor foto a 16a interrogação
+            
             $retorno = $stmt->execute();//executa comando sql
             return $retorno;
         } catch (PDOException $exc) {
@@ -70,11 +72,11 @@ class UsuarioDAO{
             echo $exc->getMessage();
             die();
         }
-    }//fim do recuperarPorID 
+    }//fim do buscarPorID 
 
     public function atualizarUsuarioPorID(UsuarioDTO $usuarioDTO) {
         try {
-            $sql = "UPDATE usuario SET nome_usu=?, email=?, senha=?, cpf=?, telefone=?, sexo=?, dt_nascimento=?, endereco=?, numero=?,complemento=?, bairro=?, cidade=?, uf=?, cep=?, id_perfil=?, situacao=? WHERE id_usuario=?";
+            $sql = "UPDATE usuario SET nome_usu=?, email=?, senha=?, cpf=?, telefone=?, sexo=?, dt_nascimento=?, endereco=?, numero=?,complemento=?, bairro=?, cidade=?, uf=?, cep=?, id_perfil=?, situacao=?, foto=? WHERE id_usuario=?";
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->bindValue(1,$usuarioDTO->getNome_usu()); //associa o valor senha a 1a interrogação
@@ -93,7 +95,8 @@ class UsuarioDAO{
             $stmt->bindValue(14,$usuarioDTO->getCep()); //associa o valor senha a 14a interrogação
             $stmt->bindValue(15,$usuarioDTO->getId_Perfil()); //associa o valor senha a 15a interrogação
             $stmt->bindValue(16,$usuarioDTO->getSituacao()); //associa o valor senha a 16a interrogação
-            $stmt->bindValue(17,$usuarioDTO->getId_usuario()); //associa o valor senha a 17a interrogação
+            $stmt->bindValue(17,$usuarioDTO->getFoto()); //associa o valor senha a 16a interrogação
+            $stmt->bindValue(18,$usuarioDTO->getId_usuario()); //associa o valor senha a 17a interrogação
 
             $retorno = $stmt->execute();
             return $retorno;

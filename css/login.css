@@ -1,0 +1,37 @@
+.div_login{
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 80px;
+    border-radius: 15px;
+    color: #fff;
+    text-align: center;
+    }
+
+.div_login h1{
+    font-weight: 700;
+}
+.input{
+    padding: 15px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+.button{
+    background-color: #d36833;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    opacity: 0.8;
+
+}
+.button:hover{
+    background-color: #d36833;
+    cursor: pointer;
+    opacity: 1;
+}

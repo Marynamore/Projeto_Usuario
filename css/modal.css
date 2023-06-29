@@ -1,0 +1,26 @@
+/* Estilização da camada escura por cima da página */
+.overlay {
+    position: fixed; /* posiciona a camada em relação à janela do navegador */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* fundo escuro com opacidade */
+    z-index: 1; /* exibir por cima de outros elementos na página */
+    display: none; /* começa oculto */
+}
+/* Estilização da janela modal */
+.modal {
+    position: absolute; /* posiciona a janela em relação à camada escura */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* centraliza a janela na tela */
+    /*background-color:#d36833;*/
+    padding: 20px;
+    width: 80%;
+    max-width: 300px;
+    z-index: 2; /* exibir por cima da camada escura */
+    display: none; /* começa oculto */
+    border-radius: 5px;
+}
+/* Estilização do link */

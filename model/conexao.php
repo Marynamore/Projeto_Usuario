@@ -16,7 +16,7 @@ class Conexao{
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                 );
 
-                    self::$conexao = new PDO("mysql:host=localhost;dbname=projeto","root","",$options);
+                    self::$conexao = new PDO("mysql:host=localhost;dbname=projeto_usu","root","",$options);
             }catch(PDOException $exc){
                 echo "Erro ao conectar ao banco ".$exc->getMessage();
             }

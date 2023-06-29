@@ -11,9 +11,13 @@
     <h1>Cadastre-se</h1>
     <main id="container">
         <!-- Início do formulário -->
-        <form action="../control/cadastro_control.php" method="post">
+        <form action="../control/cadastro_control.php" method="post" enctype="multipart/form-data">
             <fieldset class="grupo">
                 <!-- Campo do nome com legenda "nome" e css de classe "campo" -->
+                <div class="filde">
+                    <label for="foto">Foto de Perfil:</label>
+                    <input type="file" name="foto" id="" required>
+                </div>
                 <div class="field">
                     <label for="nome_usu"><strong>Nome:</strong></label>
                     <input type="text" name="nome_usu" id="" required>
