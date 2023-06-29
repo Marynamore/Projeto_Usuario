@@ -1,4 +1,4 @@
-# Projeto_Usuario
+# Projeto Usuario
 
 Este projeto em PHP utiliza Programação Orientada a Objetos (POO) para criar um sistema CRUD (Create, Read, Update, Delete) que envolve três tipos de usuários: usuário comum, administrador e moderador.
 
@@ -10,11 +10,11 @@ O sistema oferece as seguintes funcionalidades:
 
 - [x] Cadastro de usuários: Permite que novos usuários se registrem no sistema.
 
-- [ ] Login e autenticação: Os usuários podem fazer login e autenticar-se para acessar as funcionalidades do sistema.
+- [x] Login e autenticação: Os usuários podem fazer login e autenticar-se para acessar as funcionalidades do sistema.
 
-- [ ] Permissões de acesso: Cada tipo de usuário (usuário comum, administrador e moderador) possui diferentes permissões e níveis de acesso no sistema.
+- [x] Permissões de acesso: Cada tipo de usuário (usuário comum, administrador e moderador) possui diferentes permissões e níveis de acesso no sistema.
 
-- [ ] Operações CRUD: Os usuários podem realizar operações de criação, leitura, atualização e exclusão de informações no banco de dados.
+- [x] Operações CRUD: Os usuários podem realizar operações de criação, leitura, atualização e exclusão de informações no banco de dados.
 
 ## Requisitos
 
