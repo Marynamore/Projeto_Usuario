@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if(!isset($_POST["senha"]) || empty($_POST["senha"])){
     header ( "location:../index.php?msg=Usuário e/ou senha inválidos" );	
     exit; 
@@ -21,10 +22,11 @@ if(!empty($usuarioLogado)){
     $_SESSION["nome_usu"] = $usuarioLogado["nome_usu"];
     $_SESSION["id_perfil"] = $usuarioLogado["id_perfil"];
     
-    header ( "location:../index.php" );	
+    header ( "location:../index.php?msg=Login realizado com sucesso!" );	
     exit; 
 
 } else {
     header ( "location:../index.php?msg=Usuário e/ou senha inválidos" );	
     exit; 
 }
+

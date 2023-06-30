@@ -64,19 +64,30 @@ $usuarioDTO->setId_perfil($id_perfil);
 $usuarioDAO = new UsuarioDAO(); // criando objeto DAO de usuario
 $usuarioCadastrado = $usuarioDAO->cadastrarUsuario($usuarioDTO);
 
-if($usuarioCadastrado){
+if ($usuarioCadastrado) {
     $msg = "Usuário Cadastrado com sucesso!";
     echo "<script>";
-        echo"window.location.href='../view/cadastrarUsuario.php?msg={$msg}' ";
-    echo "</script> ";
- //header("location:../visao/formCadastroUsuario.php?msg={$msg}");
-}else{
-    //se der errado redireciona para o formulario de registro
-    $msg = "ERROR ao cadastrar Usuário!";
+    echo "Swal.fire({
+            title: 'Sucesso!',
+            text: '{$msg}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = '../view/cadastrarUsuario.php';
+        });";
+    echo "</script>";
+} else {
+    $msg = "Erro ao cadastrar Usuário!";
     echo "<script>";
-        echo"window.location.href='../view/cadastrarUsuario.php?msg={$msg}' ";
-    echo "</script> ";
-    //header("location:../visao/registro.php?msg=Erro");
+    echo "Swal.fire({
+            title: 'Erro!',
+            text: '{$msg}',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = '../view/cadastrarUsuario.php';
+        });";
+    echo "</script>";
 }
 }
 ?>

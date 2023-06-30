@@ -9,11 +9,6 @@ if (isset($_SESSION["id_usuario"])) {
 } else {
     $usuarioLogado = "";
 }
-if (isset($_SESSION['msg'])) {
-    echo $_SESSION['msg'];
-    // Limpe a mensagem da sessão para que ela não seja exibida novamente na atualização da página
-    unset($_SESSION['msg']);
-}
 ?>
 
 <!DOCTYPE html>
@@ -26,8 +21,17 @@ if (isset($_SESSION['msg'])) {
     <script type="text/javascript" src="js/modal.js"></script>
     <link href="css/modal.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     <title>Meu Projeto</title>
+    <script>
+        function exibirAlerta(tipo, mensagem) {
+            Swal.fire({
+                icon: tipo,
+                title: tipo === 'success' ? 'Sucesso' : 'Erro',
+                text: mensagem,
+            });
+        }
+    </script>
 </head>
 <body>
   <!-- MENU CONFORME LOGIN -->
@@ -74,8 +78,12 @@ if (isset($_SESSION['msg'])) {
                 <button class="button">Enviar</button>
             </form>
         </div>
-        
     </div>
+    <?php
+    if (isset($_GET['msg'])) {
+        echo '<script>exibirAlerta("' . $_GET['msg'] . '");</script>';
+    }
+    ?>
 <!--FIM POP LOGIN-->
     <main>
         <section class="main_cta">
