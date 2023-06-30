@@ -20,13 +20,6 @@ class UsuarioDTO{
     private $foto;
     private $id_perfil;
 
-    //construtor
-    public function __construct($nome_usu, $email,$senha){
-        $this->nome_usu = $nome_usu;
-        $this->email = $email;
-        $this->senha = $senha;
-    }
-
     /**
      * Pegar o valor de id_usuario
      */ 

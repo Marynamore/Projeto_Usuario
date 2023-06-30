@@ -1,0 +1,77 @@
+h1{
+    text-align: center;
+}
+.painel_adm{
+    display: flex;
+    justify-content: center;
+}
+.painel_adm a{
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #f44336;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    margin-right: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+.painel_adm > a:hover{
+    background-color: #08ef;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    text-align: center;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #08ef;
+  }
+
+  tr:nth-child(even) {
+    background-color: none;
+  }
+ /* input Pesquisar */
+.search-text {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+ 
+ /* FIM DO INPUT PESQUISAR */
+.menu-item button {
+padding: 1.2em;
+margin: 1em;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+
+.menu-item button {
+background-color: #f44336;
+color: white;
+text-decoration: none;
+}

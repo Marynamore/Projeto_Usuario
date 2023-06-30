@@ -108,17 +108,41 @@ class UsuarioDAO{
 
 
     public function listarUsuarios() {
-        try {
-            $sql = "SELECT * FROM usuario ORDER BY nome_usu";
-            $stmt = $this->pdo->prepare($sql); //prepara sql a ser executada
-            $stmt->execute(); //executa comando sql
-
-            $retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $retorno;
-        } catch (PDOException $exc) {
-            echo $exc->getMessage();
-            die();
-        }
+        try{
+            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil ORDER BY id_usuario DESC";
+   
+           $stmt = $this->pdo->prepare($sql);
+           $stmt->execute();
+   
+           $usuarios = array();
+           if($stmt->rowCount() > 0){
+               while ($usuarioFetch = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                   $usuarioDTO = new usuarioDTO();
+                   $usuarioDTO->setId_usuario($usuarioFetch['id_usuario']);
+                   $usuarioDTO->setNome_usu($usuarioFetch['nome_usu']);
+                   $usuarioDTO->setDt_nascimento($usuarioFetch['dt_nascimento']);
+                   $usuarioDTO->setSexo($usuarioFetch['sexo']);
+                   $usuarioDTO->setEmail($usuarioFetch['email']);
+                   $usuarioDTO->setSenha($usuarioFetch['senha']);
+                   $usuarioDTO->setFoto($usuarioFetch['foto']);
+                   $usuarioDTO->setTelefone($usuarioFetch['telefone']);
+                   $usuarioDTO->setComplemento($usuarioFetch['complemento']);
+                   $usuarioDTO->setNumero($usuarioFetch['numero']);
+                   $usuarioDTO->setCpf($usuarioFetch['cpf']);
+                   $usuarioDTO->setBairro($usuarioFetch['bairro']);
+                   $usuarioDTO->setCidade($usuarioFetch['cidade']);
+                   $usuarioDTO->setCep($usuarioFetch['cep']);
+                   $usuarioDTO->setUf($usuarioFetch['uf']);
+                   $usuarioDTO->setId_perfil($usuarioFetch['nome_perfil']);
+                   $usuarios[] = $usuarioFetch;
+                   
+               } return $usuarios;
+           }else{
+               echo '<p>Nenhum usuario adicionado ainda!</p>';
+           }
+           }catch(PDOException $exc){
+           echo $exc->getMessage();
+       }
     }//fim do metodo listarUsuario
 
 //metodo para excluir usuario pela chave primária (id_usuario)

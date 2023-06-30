@@ -22,6 +22,10 @@ if (isset($_SESSION["id_usuario"])) {
     <link href="css/modal.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
     <title>Meu Projeto</title>
     <script>
         function exibirAlerta(tipo, mensagem) {
@@ -36,34 +40,30 @@ if (isset($_SESSION["id_usuario"])) {
 <body>
   <!-- MENU CONFORME LOGIN -->
     <header class="main_header">
-        <div class="main_header_content">
-            <a href="#" class="logo">
-                <img src="img/logo.png" alt="Bem vindo ao projeto usuário">
-            </a>
-            <nav class="main_header_content_menu">
-                <ul>
-                    <li><a href=""><i class="fa-solid fa-house"></i>HOME</a></li>
-                    <?php
-                        if (!empty($usuarioLogado)) {
-                            if ($id_perfil == 1) {
-                                echo '<li><a href="./view/dashboard/painel_adm.php"><i class="fa-solid fa-user"></i>Painel Administrador</a></li>';
-                                echo '<li><a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a></li>';
-                            } elseif ($id_perfil == 2) {
-                                echo '<li><a href="./view/dashboard/painel_moderador.php"><i class="fa-solid fa-users"></i> PAINEL MODERADOR</a></li>';
-                                echo '<li><a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a></li>';
-                            } elseif ($id_perfil == 3 || $id_perfil == 4) {
-                                echo '<li><a href="./view/perfil_usuario.php?id_usuario=' . $id_usuarioLogado . '" onclick="funcPerfil()"><i class="fa-solid fa-user"></i>' . $usuarioLogado . '</a></li>';
-                                echo '<li><a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a></li>';
-                            }
-                        } else {
-                            echo '<li><a href="./view/cadastro_usuario.php"><i class="fa-solid fa-user"></i>CADASTRO</a></li>';
-                            echo '<li><a href="" class="modal-link"><i class="fa-solid fa-user"></i>LOGIN</a></li>';
-                            echo '<li><a href="#contato">CONTATO</a></li>';
-                        }
-                    ?>
-                </ul>
-            </nav>
-        </div>
+        <a href="#" class="logo">
+            <img src="./assets/Logo.png" alt="Bem vindo ao projeto usuário">
+        </a>
+        <nav class="navbar">
+            <a href=""><i class="fa-solid fa-house"></i>HOME</a></li>
+            <?php
+                if (!empty($usuarioLogado)) {
+                    if ($id_perfil == 1) {
+                        echo '<a href="./view/perfil_adm.php"><i class="fa-solid fa-user"></i>Painel Administrador</a><';
+                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i><br>SAIR</a><';
+                    } elseif ($id_perfil == 2) {
+                        echo '<a href="./view/perfil_moderador.php"><i class="fa-solid fa-users"></i>PAINEL MODERADOR</a><';
+                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a><';
+                    } elseif ($id_perfil == 3 || $id_perfil == 4) {
+                        echo '<a href="./view/perfil_usuario.php?id_usuario=' . $id_usuarioLogado . '" onclick="funcPerfil()"><i class="fa-solid fa-user"></i>' . $usuarioLogado . '</a><';
+                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a><';
+                    }
+                } else {
+                    echo '<a href="./view/cadastro_usuario.php"><i class="fa-solid fa-user"></i>CADASTRO</a><';
+                    echo '<a href="" class="modal-link"><i class="fa-solid fa-user"></i>LOGIN</a><';
+                    echo '<a href="#contato"><i class="fa-solid fa-users"></i>CONTATO</a><';
+                }
+            ?>
+        </nav>
     </header>
 <!--POP LOGIN-->
     <div class="overlay"></div>
@@ -106,7 +106,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Cliente</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para clientes.</p>
                     <br>
-                    <p><a href="telascliente.php" class="btn">Acesse</a></p>
+                    <a href="./view/pagina_cliente.php" class="btn">Acesse</a>
                 </div>
             </aside>
             <aside>
@@ -115,7 +115,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Moderador</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para moderadores.</p>
                     <br>
-                    <p><a href="telamoderador.php" class="btn">Acesse</a></p>
+                    <a href="./view/pagina_moderador.php" class="btn">Acesse</a>
                 </div>
             </aside>
             <aside>
@@ -124,7 +124,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Administrador</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para administradores.</p>
                     <br>
-                    <p><a href="telaadministrador.php" class="btn">Acesse</a></p>
+                    <a href="./view/dashboard_adm.php" class="btn">Acesse</a>
                 </div>
             </aside>
         </section>
@@ -132,9 +132,6 @@ if (isset($_SESSION["id_usuario"])) {
     <hr>
     <footer>
         <section class="main_footer">
-            <header>
-                <h1>Quer saber mais?</h1>
-            </header>
             <article class="main_footer_our_pages">
                 <header>
                     <h2>Meu Cartão Postal</h2>
@@ -162,6 +159,7 @@ if (isset($_SESSION["id_usuario"])) {
                 <p>O objetivo é permitir que os usuários realizem operações de criação, leitura, atualização e exclusão de informações em um banco de dados, fornecendo diferentes funcionalidades e permissões de acordo com o tipo de usuário logado.</p>
             </article>
         </section>
+        <hr>
         <p>&copy; 2023 Meu Projeto. Todos os direitos reservados.</p>
     </footer>
     <script src="./js/script.js"></script>
