@@ -16,14 +16,16 @@ class UsuarioDAO{
     //Função de logar no sistema
     public function logarEmail($email, $senha){
         try{
-            $sql = "SELECT u.id_usuario, u.nome_usu, u.email, u.senha, u.fk_id_perfil, p.nome_perfil FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil WHERE email=? AND senha=?";
+            $sql = "SELECT u.id_usuario, u.nome_usu, u.email, u.senha, u.fk_id_perfil, p.nome_perfil FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil WHERE email=?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindValue(1,$email);//associa o valor email a 1a interrogação
-            $stmt->bindValue(2,$senha);//associa o valor senha a 2a interrogação
             $stmt->execute();//executa comando sql
-
             $retorno = $stmt->fetch(PDO::FETCH_ASSOC);
-            return $retorno;
+            if ($retorno && $retorno['senha'] === MD5($senha)) {
+                return $retorno;
+            } else {
+                return false;
+            }
         }catch(PDOException $exc){
             echo $exc->getMessage();
         }

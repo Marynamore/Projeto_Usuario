@@ -9,6 +9,11 @@ body {
   background-color: #2B2B2B;
 }
 
+
+html {
+  scroll-behavior: smooth;
+}
+
 h1 {
   text-align: center;
   margin-top: 2em;

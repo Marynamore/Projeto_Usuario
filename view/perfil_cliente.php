@@ -24,7 +24,9 @@ if (isset($_SESSION["id_usuario"])) {
     <title>Perfil</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css/perfil_usuario.css">
+    <link rel="stylesheet" href="../css/styleLog.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
@@ -34,41 +36,52 @@ if (isset($_SESSION["id_usuario"])) {
     <link rel="manifest" href="favicon_io/site.webmanifest">
 </head>
 <body>
-<button onclick="javascript:history.go(-1)" class="alterar">Voltar</button>
-<a class="alterar" href="./view/filmefavorito.php?id_usuario=' . $id_usuarioLogado . '" onclick="funcPerfil()"><i class="fa-regular fa-camcorder">Filmes Favoritos</i></a>
-    <h2>Confira seus dados:</h2>
-    <div class="container">
-        <div class="item-details">
-            <div class="item-address">
-                <fieldset>
-                    <legend>Dados Pessoais</legend>
-                    <?php if (!empty($usuario)) { ?>
-                        <img class='profile' src="../assets/pessoas/<?= $usuario->getFoto(); ?>" alt="">
-                    <?php } ?>
-                    <p><strong>Nome:</strong> <?= $usuario->getNome_usu() ?></p>
-                    <p><strong>Gênero:</strong> <?= $usuario->getSexo() ?></p>
-                    <p><strong>Data de Nascimento:</strong> <?= $usuario->getDt_nascimento() ?></p>
-                    <p><strong>Telefone:</strong> <?= $usuario->getTelefone() ?></p>
-                    <p><strong>Email:</strong> <?= $usuario->getEmail() ?></p>
-                    <p><strong>CPF ou CNPJ:</strong> <?= $usuario->getCpf() ?></p>
-                </fieldset>
-                <fieldset>
-                    <legend>Endereço</legend>
-                    <p><strong>Endereço:</strong> <?= $usuario->getEndereco() ?></p>
-                    <p><strong>Nº:</strong> <?= $usuario->getNumero() ?></p>
-                    <p><strong>Complemento:</strong> <?= $usuario->getComplemento() ?></p>
-                    <p><strong>Bairro:</strong> <?= $usuario->getBairro() ?></p>
-                    <p><strong>Cidade:</strong> <?= $usuario->getCidade() ?></p>
-                    <p><strong>CEP:</strong> <?= $usuario->getCep() ?></p>
-                    <p><strong>UF:</strong> <?= $usuario->getUF() ?></p>
-                </fieldset>
-                <button><a class="alterar" href="./alterar_usuario.php?id_usuario=<?= $usuario->getId_usuario() ?>">ALTERAR</a></button>
-                <button><a class="alterar" href="../control/excluir.php?id_usuario=<?= $usuario->getId_usuario() ?>" onclick="return confirm('Tem certeza de que deseja excluir o usuário?')">EXCLUIR</a></button>
-
-            </div>
+    <header class="main_header">
+        <a href="../index.php" class="logo">
+            <img src="../assets/Logo.png" alt="Bem vindo ao projeto usuário">
+        </a>
+        <nav class="navbar">
+            <a href="../index.php"><i class="fa-solid fa-house"></i>HOME</a></li>
+            <a href="http://" target="_blank"><i class="fa-solid fa-headphones"></i>AJUDA</a>
+            <?php
+                if (!empty($usuarioLogado)) {
+                    if ($id_perfil == 2) {
+                        echo '<a href="perfil_adm.php"><i class="fa-solid fa-user"></i>'.$usuarioLogado.'</a>';
+                        echo '<a class="border1" href="../control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
+                    }
+                }
+            ?>
+        </nav>
+    </header>    
+    <h1>Confira seus dados:</h1>
+    <main id="container">
+        <div class="dados">
+            <fieldset class="grupo">
+                <legend><strong>Dados Pessoais</strong></legend>
+                <?php if (!empty($usuario)) { ?>
+                    <img class='profile' src="../assets/pessoas/<?= $usuario->getFoto(); ?>" alt="">
+                <?php } ?>
+                <p class="field"><strong>Nome:</strong> <br><?= $usuario->getNome_usu() ?></p>
+                <p class="field"><strong>Gênero:</strong> <br><?= $usuario->getSexo() ?></p>
+                <p class="field"><strong>Data de Nascimento:</strong> <br><?= $usuario->getDt_nascimento() ?></p>
+                <p class="field"><strong>Telefone:</strong> <br><?= $usuario->getTelefone() ?></p>
+                <p class="field"><strong>Email:</strong> <br><?= $usuario->getEmail() ?></p>
+                <p class="field"><strong>CPF ou CNPJ:</strong> <br><?= $usuario->getCpf() ?></p>
+            </fieldset>
+            <fieldset class="grupo">
+                <legend>Endereço</legend>
+                <p class="field"><strong>Endereço:</strong> <br><?= $usuario->getEndereco() ?></p>
+                <p class="field"><strong>Nº:</strong> <br><?= $usuario->getNumero() ?></p>
+                <p class="field"><strong>Complemento:</strong> <?= $usuario->getComplemento() ?></p>
+                <p class="field"><strong>Bairro:</strong> <br><?= $usuario->getBairro() ?></p>
+                <p class="field"><strong>Cidade:</strong> <br><?= $usuario->getCidade() ?></p>
+                <p class="field"><strong>CEP:</strong> <br><?= $usuario->getCep() ?></p>
+                <p class="field"><strong>UF:</strong> <br><?= $usuario->getUF() ?></p>
+            </fieldset>
+            <a class="botao" href="./alterar_usuario.php?id_usuario=<?= $usuario->getId_usuario() ?>">ALTERAR</a>
+            <a class="botao" href="../control/excluir.php?id_usuario=<?= $usuario->getId_usuario() ?>" onclick="return confirm('Tem certeza de que deseja excluir o usuário?')">EXCLUIR</a>
         </div>
-    </div>
-
-    <script src="" async defer></script>
+    </main>
 </body>
 </html>
+

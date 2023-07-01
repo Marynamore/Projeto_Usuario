@@ -107,7 +107,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Cliente</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para clientes.</p>
                     <br>
-                    <a href="./view/pagina_cliente.php" class="btn">Acesse</a>
+                    <a href="./view/perfil_cliente.php" class="btn">Acesse</a>
                 </div>
             </aside>
             <aside>
