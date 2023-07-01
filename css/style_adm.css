@@ -1,47 +1,53 @@
 h1{
-    text-align: center;
-}
-.painel_adm{
-    display: flex;
-    justify-content: center;
-}
-.painel_adm a{
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #f44336;
-    color: white;
-    text-decoration: none;
-    display: flex;
-    margin-right: 50px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 10px;
+  text-align: center;
 }
 
-.painel_adm > a:hover{
-    background-color: #08ef;
+.painel_adm{
+  display: flex;
+  justify-content: center;
+  
+}
+.painel_adm a{
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #525050;
+  color: white;
+  text-decoration: none;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.painel_adm h2{
+  text-align: center;
+  margin: 2em;
+}
+
+.painel_adm a:hover{
+  background-color: #DDC6A4;
 }
 
 table {
-    border-collapse: collapse;
-    width: 100%;
-  }
+  border-collapse: collapse;
+  width: 100%;
+}
 
-  th, td {
-    text-align: center;
-    padding: 8px;
-  }
+th, td {
+  text-align: center;
+  padding: 8px;
+}
 
-  th {
-    background-color: #08ef;
-  }
+th {
+  background-color: #846D62;
+}
 
-  tr:nth-child(even) {
-    background-color: none;
-  }
- /* input Pesquisar */
+tr:nth-child(even) {
+  background-color: none;
+}
+
+/* input Pesquisar */
 .search-text {
     padding: 10px;
     font-size: 16px;
@@ -52,7 +58,7 @@ table {
   .search-btn {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
+    background-color: #525050;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -71,7 +77,12 @@ cursor: pointer;
 
 
 .menu-item button {
-background-color: #f44336;
+background-color: #525050;
 color: white;
 text-decoration: none;
+}
+
+.menu-item button:hover{
+  color: black;
+  background-color: #DDC6A4;
 }

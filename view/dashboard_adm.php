@@ -5,6 +5,7 @@ $id_usuarioLogado = "";
 $id_perfil = "";
 
 if (isset($_SESSION["id_usuario"])) {
+    $usuarioLogado = $_SESSION["nome_usu"];
     $id_usuarioLogado = $_SESSION["id_usuario"];
     $id_perfil = $_SESSION["id_perfil"];
 } else {
@@ -79,16 +80,16 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
 </head>
 <body onload="definirConteudoInicial()">
     <header class="main_header">
-        <a href="#" class="logo">
+        <a href="../index.php" class="logo">
             <img src="../assets/Logo.png" alt="Bem vindo ao projeto usuário">
         </a>
         <nav class="navbar">
-            <a href=""><i class="fa-solid fa-house"></i>HOME</a></li>
+            <a href="../index.php"><i class="fa-solid fa-house"></i>HOME</a></li>
             <?php
                 if (!empty($usuarioLogado)) {
                     if ($id_perfil == 1) {
-                        echo '<a href="./view/dashboard/painel_adm.php"><i class="fa-solid fa-user"></i>Painel Administrador</a>';
-                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i><br>SAIR</a>';
+                        echo '<a href="perfil_adm.php"><i class="fa-solid fa-user"></i>Painel Administrador</a>';
+                        echo '<a class="border1" href="../control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
                     }
                 }
             ?>
@@ -115,17 +116,12 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
             <h2>Olá, <?php echo $_SESSION["nome_usu"]; ?>!</h2>
         </div>
         <div class="conteudo" id="usuarios">
-            <form action="" method="get" style="display: flex; justify-content: flex-end;">
-                <input type="search" class="search-text" placeholder="Pesquisar..." name="query" id="pesquisar">
-                <button type="submit" class="search-btn">Pesquisar</button>
-            </form>
-
             <h2>Usuários</h2>
             <?php
-            require_once '../model/dao/UsuarioDAO.php';
-            $UsuarioDAO = new UsuarioDAO();
+            require_once '../model/usuarioDAO.php';
+            $usuarioDAO = new UsuarioDAO();
 
-            $usuario = $UsuarioDAO->listarUsuarios();
+            $usuario = $usuarioDAO->listarUsuarios();
             ?>
 
             <table id="dataTable">
@@ -154,8 +150,8 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
                     <td><?= $usuarioFetch["foto"] ?></td>
                     <td><?= $usuarioFetch["nome_perfil"] ?></td>
                     <td>
-                    <a href="../alterar_usuario.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="ALTERAR">Alterar <i class="bi bi-pencil"></i></a>
-                    <a href="../../control/excluir.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')">Excluir <i class="fa fa-trash fa-lg"></i></a>
+                        <a href="../alterar_usuario.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="ALTERAR">Alterar <i class="bi bi-pencil"></i></a>
+                        <a href="../../control/excluir.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')">Excluir</a>
                     </td>
                 </tr>
                 <?php } ?>

@@ -8,27 +8,24 @@ $email = strip_tags($_POST["email"]);
 $senha = $_POST["senha"];
 
 $usuarioDAO = new UsuarioDAO();
-$usuarioLogado = $usuarioDAO->logarEmail($email,$senha);
+$usuarioLogado = $usuarioDAO->logarEmail($email, $senha);
 
-if(!empty($usuarioLogado)){
-    
+if (!empty($usuarioLogado)) {
     $_SESSION["id_usuario"] = $usuarioLogado["id_usuario"];
     $_SESSION["email"] = $usuarioLogado["email"];
     $_SESSION["nome_usu"] = $usuarioLogado["nome_usu"];
     $_SESSION["id_perfil"] = $usuarioLogado["fk_id_perfil"];
-    
+
     $id_perfil = $_SESSION["id_perfil"];
 
-    if(in_array($id_perfil,[2,3])){
-        header ( "location:../index.php?msg=Login realizado com sucesso!" );	
-        exit; 
-    }elseif(in_array($id_perfil,[1])){
-        header ( "location:../view/dashboard_adm.php?msg=Login realizado com sucesso!" );	
-        exit; 
+    if (in_array($id_perfil, [2, 3])) {
+        header("location:../index.php?msg=Login realizado com sucesso!");
+        exit;
+    } elseif (in_array($id_perfil, [1])) {
+        header("location:../view/dashboard_adm.php?msg=Login realizado com sucesso!");
+        exit;
     }
-
 } else {
-    header ( "location:../index.php?msg=Usuário e/ou senha inválidos" );	
-    exit; 
+    header("location:../index.php?msg=Usuário e/ou senha inválidos");
+    exit;
 }
-

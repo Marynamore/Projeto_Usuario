@@ -18,6 +18,7 @@ class UsuarioDTO{
     private $cep;
     private $situacao;
     private $foto;
+    private $obs;
     private $id_perfil;
 
     /**
@@ -166,19 +167,34 @@ class UsuarioDTO{
     } 
 
     /**
-     * Pegar o valor de endereco
+     * Pegar o valor de foto
      */ 
     public function getFoto(){
         return $this->foto;
     }
     /**
-     * Defina o valor de dt_nascimento
+     * Defina o valor de foto
      *
      * @return  self
      */
     public function setFoto($foto){
         $this->foto = $foto;
     }    
+
+    /**
+     * Pegar o valor de Observação
+     */ 
+    public function getObs(){
+        return $this->obs;
+    }
+    /**
+     * Defina o valor de Observação
+     *
+     * @return  self
+     */
+    public function setObs($obs){
+        $this->obs = $obs;
+    }   
 
     /**
      * Pegar o valor de endereco

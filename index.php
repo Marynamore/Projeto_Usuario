@@ -3,10 +3,11 @@ session_start();
 
 
 if (isset($_SESSION["id_usuario"])) {
+    $usuarioLogado = $_SESSION["nome_usu"];
     $id_usuarioLogado = $_SESSION["id_usuario"];
     $id_perfil = $_SESSION["id_perfil"];
 } else {
-    $usuarioLogado = "";
+    $usuarioLogado = null;
 }
 ?>
 
@@ -48,19 +49,19 @@ if (isset($_SESSION["id_usuario"])) {
             <?php
                 if (!empty($usuarioLogado)) {
                     if ($id_perfil == 1) {
-                        echo '<a href="./view/perfil_adm.php"><i class="fa-solid fa-user"></i>Painel Administrador</a><';
-                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i><br>SAIR</a><';
-                    } elseif ($id_perfil == 2) {
-                        echo '<a href="./view/perfil_moderador.php"><i class="fa-solid fa-users"></i>PAINEL MODERADOR</a><';
-                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a><';
+                        echo '<a href="./view/perfil_adm.php"><i class="fa-solid fa-user"></i>Painel Administrador</a>';
+                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
                     } elseif ($id_perfil == 3) {
-                        echo '<a href="./view/perfil_usuario.php?id_usuario=' . $id_usuarioLogado . '" onclick="funcPerfil()"><i class="fa-solid fa-user"></i>' . $usuarioLogado . '</a><';
-                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a><';
+                        echo '<a href="./view/perfil_moderador.php"><i class="fa-solid fa-users"></i>PAINEL MODERADOR</a>';
+                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
+                    } elseif ($id_perfil == 2) {
+                        echo '<a href="./view/perfil_cliente.php?id_usuario=' . $id_usuarioLogado . '" onclick="funcPerfil()"><i class="fa-solid fa-user"></i>' . $usuarioLogado . '</a>';
+                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
                     }
                 } else {
                     echo '<a href="./view/cadastro_usuario.php"><i class="fa-solid fa-user"></i>CADASTRO</a>';
                     echo '<a href="" class="modal-link"><i class="fa-solid fa-user"></i>LOGIN</a>';
-                    echo '<a href="#contato"><i class="fa-solid fa-users"></i>CONTATO</a>';
+                    echo '<a href="https://marynamore.github.io/profile/" target="_blank"><i class="fa-solid fa-users"></i>CONTATO</a>';
                 }
             ?>
         </nav>
@@ -69,7 +70,7 @@ if (isset($_SESSION["id_usuario"])) {
     <div class="overlay"></div>
         <div class="modal">
             <div class="div_login">
-                <form action="control/login_control.php" method="POST">
+                <form action="./control/login_control.php" method="POST">
                 <h1>Login</h1><br>
                 <input type="text" placeholder="Email" name="email" class="input">
                 <br><br>
@@ -80,9 +81,9 @@ if (isset($_SESSION["id_usuario"])) {
         </div>
     </div>
     <?php
-    if (isset($_GET['msg'])) {
-        echo '<script>exibirAlerta("' . $_GET['msg'] . '");</script>';
-    }
+        if (isset($_GET['msg'])) {
+            echo '<script>exibirAlerta("' . $_GET['msg'] . '");</script>';
+        }
     ?>
 <!--FIM POP LOGIN-->
     <main>
