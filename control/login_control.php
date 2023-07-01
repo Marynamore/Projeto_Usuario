@@ -1,11 +1,6 @@
 <?php
 session_start();
-
-if(!isset($_POST["senha"]) || empty($_POST["senha"])){
-    header ( "location:../index.php?msg=Usuário e/ou senha inválidos" );	
-    exit; 
-}
-
+require_once '../model/conexao.php';
 require_once '../model/usuarioDTO.php';
 require_once '../model/usuarioDAO.php';
 
@@ -20,10 +15,17 @@ if(!empty($usuarioLogado)){
     $_SESSION["id_usuario"] = $usuarioLogado["id_usuario"];
     $_SESSION["email"] = $usuarioLogado["email"];
     $_SESSION["nome_usu"] = $usuarioLogado["nome_usu"];
-    $_SESSION["id_perfil"] = $usuarioLogado["id_perfil"];
+    $_SESSION["id_perfil"] = $usuarioLogado["fk_id_perfil"];
     
-    header ( "location:../index.php?msg=Login realizado com sucesso!" );	
-    exit; 
+    $id_perfil = $_SESSION["id_perfil"];
+
+    if(in_array($id_perfil,[2,3])){
+        header ( "location:../index.php?msg=Login realizado com sucesso!" );	
+        exit; 
+    }elseif(in_array($id_perfil,[1])){
+        header ( "location:../view/dashboard_adm.php?msg=Login realizado com sucesso!" );	
+        exit; 
+    }
 
 } else {
     header ( "location:../index.php?msg=Usuário e/ou senha inválidos" );	

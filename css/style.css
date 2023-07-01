@@ -51,13 +51,14 @@
     color: #eee;
     background-color: #846D62;
 }
+
 /*FIM - TOPO*/
 
 
 /*INICIO - 1ª DOBRA*/
 
 .main_cta{
-    width:100%;
+    width: 100%;
     background-image: url('../IMG/bg_main_home.png');
     background-color: #525050;
     background-repeat: no-repeat;
@@ -66,7 +67,7 @@
 }
 
 .main_cta .main_cta_content{
-    max-width: 1300px;
+    width: 100%;
     margin:0 auto;
 }
 .main_cta .main_cta_content h1{
@@ -112,20 +113,14 @@
 .main_blog_header h1{
 color:#333;
 margin-bottom: 5px;
-font-size: 1.8em;
+font-size: 3em;
+text-align: center;
 }
 
 .main_blog aside{
 flex-basis: calc(25% - 20px);
 margin-bottom: 30px;
-opacity: 0.7;
 }
-
-
-.main_blog aside:hover{
-    opacity:1;
-}
-
     
 .main_blog aside p{
    margin: 10px 0;

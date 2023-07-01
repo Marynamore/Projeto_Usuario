@@ -3,7 +3,6 @@ session_start();
 
 
 if (isset($_SESSION["id_usuario"])) {
-    $usuarioLogado = $_SESSION["nickname_usu"];
     $id_usuarioLogado = $_SESSION["id_usuario"];
     $id_perfil = $_SESSION["id_perfil"];
 } else {
@@ -22,6 +21,7 @@ if (isset($_SESSION["id_usuario"])) {
     <link href="css/modal.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
@@ -31,7 +31,7 @@ if (isset($_SESSION["id_usuario"])) {
         function exibirAlerta(tipo, mensagem) {
             Swal.fire({
                 icon: tipo,
-                title: tipo === 'success' ? 'Sucesso' : 'Erro',
+                title: tipo === 'success' ? 'Login realizado com Sucesso!' : 'OPS! Email e/ou Senha Inválidos',
                 text: mensagem,
             });
         }
@@ -40,11 +40,11 @@ if (isset($_SESSION["id_usuario"])) {
 <body>
   <!-- MENU CONFORME LOGIN -->
     <header class="main_header">
-        <a href="#" class="logo">
+        <a href="" class="logo">
             <img src="./assets/Logo.png" alt="Bem vindo ao projeto usuário">
         </a>
         <nav class="navbar">
-            <a href=""><i class="fa-solid fa-house"></i>HOME</a></li>
+            <a href="index.php"><i class="fa-solid fa-house"></i>HOME</a></li>
             <?php
                 if (!empty($usuarioLogado)) {
                     if ($id_perfil == 1) {
@@ -53,14 +53,14 @@ if (isset($_SESSION["id_usuario"])) {
                     } elseif ($id_perfil == 2) {
                         echo '<a href="./view/perfil_moderador.php"><i class="fa-solid fa-users"></i>PAINEL MODERADOR</a><';
                         echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a><';
-                    } elseif ($id_perfil == 3 || $id_perfil == 4) {
+                    } elseif ($id_perfil == 3) {
                         echo '<a href="./view/perfil_usuario.php?id_usuario=' . $id_usuarioLogado . '" onclick="funcPerfil()"><i class="fa-solid fa-user"></i>' . $usuarioLogado . '</a><';
                         echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a><';
                     }
                 } else {
-                    echo '<a href="./view/cadastro_usuario.php"><i class="fa-solid fa-user"></i>CADASTRO</a><';
-                    echo '<a href="" class="modal-link"><i class="fa-solid fa-user"></i>LOGIN</a><';
-                    echo '<a href="#contato"><i class="fa-solid fa-users"></i>CONTATO</a><';
+                    echo '<a href="./view/cadastro_usuario.php"><i class="fa-solid fa-user"></i>CADASTRO</a>';
+                    echo '<a href="" class="modal-link"><i class="fa-solid fa-user"></i>LOGIN</a>';
+                    echo '<a href="#contato"><i class="fa-solid fa-users"></i>CONTATO</a>';
                 }
             ?>
         </nav>
@@ -102,7 +102,7 @@ if (isset($_SESSION["id_usuario"])) {
             </header>
             <aside>
                 <div class="imagens_acesso">
-                    <img src="assets/img/cliente.png" alt="Imagem post" title="Cliente" class="imagem1">
+                    <img src="https://images.unsplash.com/photo-1556741533-6e6a62bd8b49?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGNsaWVudGV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60" alt="Imagem post" title="Cliente" class="imagem1">
                     <p class="category">Área do Cliente</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para clientes.</p>
                     <br>
@@ -111,7 +111,7 @@ if (isset($_SESSION["id_usuario"])) {
             </aside>
             <aside>
                 <div class="imagens_acesso">
-                    <img src="assets/img/moderador.png" alt="Imagem post" title="Moderador" class="imagem1">
+                    <img src="https://images.unsplash.com/photo-1631624215749-b10b3dd7bca7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGFkbWluaXN0cmFkb3J8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60" alt="Imagem post" title="Moderador" class="imagem1">
                     <p class="category">Área do Moderador</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para moderadores.</p>
                     <br>
@@ -120,7 +120,7 @@ if (isset($_SESSION["id_usuario"])) {
             </aside>
             <aside>
                 <div class="imagens_acesso">
-                    <img src="assets/img/administrador.png" alt="Imagem post" title="Administrador" class="imagem1">
+                    <img src="https://media.istockphoto.com/id/1438634414/pt/foto/business-women-laptop-and-and-happy-team-in-office-for-web-design-collaboration-and-training.webp?b=1&s=170667a&w=0&k=20&c=m-3MLU7IDG5AP3QNwhfv5kXNhPS0gTlevT_M7kCAe5c=" alt="Imagem post" title="Administrador" class="imagem1">
                     <p class="category">Área do Administrador</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para administradores.</p>
                     <br>

@@ -1,12 +1,12 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #002b46;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-img {
-  max-width: 100%;
-  height: auto;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #2B2B2B;
 }
 
 h1 {
@@ -15,25 +15,28 @@ h1 {
   color: #E0E0F8;
 }
 
+form{
+  text-align: center;
+}
+
 #container {
-  border: 3px solid #085178d4;
+  border: 3px solid #2B2B2B;
   box-shadow: 0 0.1rem 0.8rem rgba(0, 0, 0, 0.8);
-  border-color: #085178d4;
-  background: #77A1D3;
-  padding: 0 0 3em 0;
+  border-color: #525050;
+  background: #846D62;
   margin: 3em 5em;
 }
 
-form {
+fieldset {
+  padding: 10px;
+  border: 3px solid #525050;
+  border-radius: 10px;
+  width: 800px;
   margin: 4em 1em 0 1em;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   font-size: large;
-}
-
-fieldset {
-  border: 0;
+  color: #eee;
 }
 
 .field {
@@ -49,7 +52,7 @@ fieldset {
 .field select,
 .field textarea {
   padding: 0.2em;
-  border: 1px solid #59429d;
+  border: 1px solid #846D62;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
   width: 20em;
 }
@@ -61,12 +64,27 @@ fieldset {
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  background: #E0E0F8;
+  background: #DDC6A4;
 }
+
+legend {
+  font-weight: bold;
+  font-size: 18px;
+  color: #fff;
+}
+
+.input{
+  padding: 15px;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-size: 15px;
+}
+
 
 .botao {
   font-size: 1.5em;
-  background: #59429d;
+  background: #525050;
   border: 0;
   margin-bottom: 1.2em;
   color: #ffffff;
@@ -78,9 +96,10 @@ fieldset {
 }
 
 .botao:hover {
-  background: #CCBBFF;
+  background: #DDC6A4;
   box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
   text-shadow: none;
+  color: black;
 }
 
 .botao,
@@ -97,36 +116,6 @@ select {
   .field {
     width: 100%;
     margin-right: 0;
-  }
-}
-
-/* Login */
-
-body{
-position: relative;
-}
-
-.img-wrapper {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.img-wrapper img {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  opacity: 0.5;
-  animation: zoom 15s;
-}
-
-@keyframes zoom {
-  0% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
   }
 }
 

@@ -61,6 +61,7 @@ CREATE TABLE `usuario` (
   `cep` CHAR(9) DEFAULT NULL,
   `uf` CHAR(2) DEFAULT NULL,
   `foto` VARCHAR(50) DEFAULT NULL,
+  `obs` TEXT DEFAULT NULL,
   `situacao` VARCHAR(10) DEFAULT 'Ativo' COMMENT 'Ativo\\nCancelado\\nBloqueado',
   `fk_id_perfil` INT(11) NOT NULL,
   PRIMARY KEY (`id_usuario`, `fk_id_perfil`),
