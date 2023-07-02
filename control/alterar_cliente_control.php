@@ -62,10 +62,10 @@ $usuarioDTO->setId_perfil($id_perfil);
 
 
 $usuarioDAO = new UsuarioDAO(); // criando objeto DAO de usuario
-$usuarioCadastrado = $usuarioDAO->cadastrarUsuario($usuarioDTO);
+$usuarioCadastrado = $usuarioDAO->atualizarUsuarioPorID($usuarioDTO);
 
 if ($usuarioCadastrado) {
-    $msg = "Usuário Cadastrado com sucesso!";
+    $msg = "Usuário Alterado com sucesso!";
     echo "<script>";
     echo "Swal.fire({
             title: 'Sucesso!',
@@ -73,11 +73,11 @@ if ($usuarioCadastrado) {
             icon: 'success',
             confirmButtonText: 'OK'
         }).then(() => {
-            window.location.href = '../view/cadastro_usuario.php';
+            window.location.href = '../view/alterar_cliente.php';
         });";
     echo "</script>";
 } else {
-    $msg = "Erro ao cadastrar Usuário!";
+    $msg = "Erro ao Alterar Usuário!";
     echo "<script>";
     echo "Swal.fire({
             title: 'Erro!',
@@ -85,9 +85,8 @@ if ($usuarioCadastrado) {
             icon: 'error',
             confirmButtonText: 'OK'
         }).then(() => {
-            window.location.href = '../view/cadastro_usuario.php';
+            window.location.href = '../view/alterar_cliente.php';
         });";
     echo "</script>";
 }
 }
-?>

@@ -21,8 +21,6 @@ if (isset($_SESSION["id_usuario"])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Perfil</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../css/styleLog.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -34,6 +32,7 @@ if (isset($_SESSION["id_usuario"])) {
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
     <link rel="manifest" href="favicon_io/site.webmanifest">
+    <title>Perfil</title>
 </head>
 <body>
     <header class="main_header">
@@ -78,7 +77,7 @@ if (isset($_SESSION["id_usuario"])) {
                 <p class="field"><strong>CEP:</strong> <br><?= $usuario->getCep() ?></p>
                 <p class="field"><strong>UF:</strong> <br><?= $usuario->getUF() ?></p>
             </fieldset>
-            <a class="botao" href="./alterar_usuario.php?id_usuario=<?= $usuario->getId_usuario() ?>">ALTERAR</a>
+            <a class="botao" href="./alterar_cliente.php?id_usuario=<?= $usuario->getId_usuario() ?>">ALTERAR</a>
             <a class="botao" href="../control/excluir.php?id_usuario=<?= $usuario->getId_usuario() ?>" onclick="return confirm('Tem certeza de que deseja excluir o usuário?')">EXCLUIR</a>
         </div>
     </main>

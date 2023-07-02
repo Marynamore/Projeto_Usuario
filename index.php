@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 if (isset($_SESSION["id_usuario"])) {
     $usuarioLogado = $_SESSION["nome_usu"];
     $id_usuarioLogado = $_SESSION["id_usuario"];
@@ -30,13 +29,15 @@ if (isset($_SESSION["id_usuario"])) {
     <title>Meu Projeto</title>
     <script>
         function exibirAlerta(tipo, mensagem) {
+            let title = tipo === 'success' ? 'Login realizado com Sucesso!' : 'OPS! Email e/ou Senha Inválidos';
             Swal.fire({
                 icon: tipo,
-                title: tipo === 'success' ? 'Login realizado com Sucesso!' : 'OPS! Email e/ou Senha Inválidos',
+                title: title,
                 text: mensagem,
             });
         }
     </script>
+
 </head>
 <body>
   <!-- MENU CONFORME LOGIN -->
@@ -66,6 +67,20 @@ if (isset($_SESSION["id_usuario"])) {
             ?>
         </nav>
     </header>
+    <?php
+    if (isset($_GET['msg'])) {
+        if ($_GET['msg'] === 'success') {
+            $tipo = 'success';
+            $mensagem = 'Login realizado com Sucesso!';
+        } elseif ($_GET['msg'] === 'error') {
+            $tipo = 'error';
+            $mensagem = 'OPS! Email e/ou Senha Inválidos';
+        }
+
+        echo '<script>exibirAlerta("' . $tipo . '", "' . $mensagem . '");</script>';
+    }
+    ?>
+
 <!--POP LOGIN-->
     <div class="overlay"></div>
         <div class="modal">
@@ -80,11 +95,6 @@ if (isset($_SESSION["id_usuario"])) {
             </form>
         </div>
     </div>
-    <?php
-        if (isset($_GET['msg'])) {
-            echo '<script>exibirAlerta("' . $_GET['msg'] . '");</script>';
-        }
-    ?>
 <!--FIM POP LOGIN-->
     <main>
         <section class="main_cta">
