@@ -22,7 +22,8 @@ h1{
 
 .painel_adm h2{
   text-align: center;
-  margin: 2em;
+  padding: 1em;
+  text-decoration-line: underline;
 }
 
 .painel_adm a:hover{

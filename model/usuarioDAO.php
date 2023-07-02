@@ -102,7 +102,7 @@ class UsuarioDAO{
 
     public function atualizarUsuarioPorID(UsuarioDTO $usuarioDTO) {
         try {
-            $sql = "UPDATE usuario SET nome_usu=?, email=?, senha=?, cpf=?, telefone=?, sexo=?, dt_nascimento=?, endereco=?, numero=?,complemento=?, bairro=?, cidade=?, uf=?, cep=?, id_perfil=?, situacao=?, foto=? WHERE id_usuario=?";
+            $sql = "UPDATE usuario SET nome_usu=?, email=?, senha=?, cpf=?, telefone=?, sexo=?, dt_nascimento=?, endereco=?, numero=?,complemento=?, bairro=?, cidade=?, uf=?, cep=?, fk_id_perfil=?, situacao=?, foto=? obs=? WHERE id_usuario=?";
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->bindValue(1,$usuarioDTO->getNome_usu()); //associa o valor nome a 1a interrogação
@@ -121,8 +121,9 @@ class UsuarioDAO{
             $stmt->bindValue(14,$usuarioDTO->getCep()); //associa o valor cep a 14a interrogação
             $stmt->bindValue(15,$usuarioDTO->getId_Perfil()); //associa o valor Id_perfil a 15a interrogação
             $stmt->bindValue(16,$usuarioDTO->getSituacao()); //associa o valor situação a 16a interrogação
-            $stmt->bindValue(17,$usuarioDTO->getFoto()); //associa o valor foto a 16a interrogação
-            $stmt->bindValue(18,$usuarioDTO->getId_usuario()); //associa o valor id_usuario a 17a interrogação
+            $stmt->bindValue(17,$usuarioDTO->getFoto()); //associa o valor foto a 17a interrogação
+            $stmt->bindValue(18,$usuarioDTO->getObs()); //associa o valor foto a 18a interrogação
+            $stmt->bindValue(19,$usuarioDTO->getId_usuario()); //associa o valor id_usuario a 19a interrogação
 
             $retorno = $stmt->execute();
             return $retorno;
@@ -145,13 +146,13 @@ class UsuarioDAO{
                while ($usuarioFetch = $stmt->fetch(PDO::FETCH_ASSOC)) {
                    $usuarioDTO = new usuarioDTO();
                    $usuarioDTO->setId_usuario($usuarioFetch['id_usuario']);
+                   $usuarioDTO->setFoto($usuarioFetch['foto']);
                    $usuarioDTO->setNome_usu($usuarioFetch['nome_usu']);
                    $usuarioDTO->setDt_nascimento($usuarioFetch['dt_nascimento']);
                    $usuarioDTO->setSexo($usuarioFetch['sexo']);
                    $usuarioDTO->setEmail($usuarioFetch['email']);
-                   $usuarioDTO->setSenha($usuarioFetch['senha']);
-                   $usuarioDTO->setFoto($usuarioFetch['foto']);
                    $usuarioDTO->setTelefone($usuarioFetch['telefone']);
+                   $usuarioDTO->setEndereco($usuarioFetch['endereco']);
                    $usuarioDTO->setComplemento($usuarioFetch['complemento']);
                    $usuarioDTO->setNumero($usuarioFetch['numero']);
                    $usuarioDTO->setCpf($usuarioFetch['cpf']);
@@ -159,6 +160,7 @@ class UsuarioDAO{
                    $usuarioDTO->setCidade($usuarioFetch['cidade']);
                    $usuarioDTO->setCep($usuarioFetch['cep']);
                    $usuarioDTO->setUf($usuarioFetch['uf']);
+                   $usuarioDTO->setObs($usuarioFetch['obs']);
                    $usuarioDTO->setId_perfil($usuarioFetch['nome_perfil']);
                    $usuarios[] = $usuarioFetch;
                    

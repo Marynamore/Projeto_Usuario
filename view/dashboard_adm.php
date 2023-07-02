@@ -125,37 +125,69 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
             ?>
 
             <table id="dataTable">
-            <thead>
-                <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Data de Nascimento</th>
-                <th>Sexo</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th>Foto</th>
-                <th>Perfil</th>
-                <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($usuario as $usuarioFetch) { ?>
-                <tr>
-                    <td><?= $usuarioFetch["id_usuario"] ?></td>
-                    <td><?= $usuarioFetch["nome_usu"] ?></td>
-                    <td><?= $usuarioFetch["dt_nascimento"] ?></td>
-                    <td><?= $usuarioFetch["sexo"] ?></td>
-                    <td><?= $usuarioFetch["email"] ?></td>
-                    <td><?= $usuarioFetch["telefone"] ?></td>
-                    <td><?= $usuarioFetch["foto"] ?></td>
-                    <td><?= $usuarioFetch["nome_perfil"] ?></td>
-                    <td>
-                        <a href="../alterar_usuario.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="ALTERAR">Alterar <i class="bi bi-pencil"></i></a>
-                        <a href="../../control/excluir.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')">Excluir</a>
-                    </td>
-                </tr>
-                <?php } ?>
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>Id</th> 
+                        <th>Foto</th>
+                        <th>Nome do Cliente</th>
+                        <th>E-mail</th>
+                        <th>CPF</th>
+                        <th>Telefone</th>
+                        <th>Data de Nascimento</th>
+                        <th>Sexo</th>
+                        <th>Situação</th>
+                        <th>Observação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($usuario as $usuarioFetch) { ?>
+                    <tr>
+                        <td><?= $usuarioFetch["id_usuario"] ?></td>
+                        <td><img src="../assets/pessoas/<?= $usuarioFetch["foto"]?>" alt="Foto do Cliente" width="200px"></td>
+                        <td><?= $usuarioFetch["nome_usu"] ?></td>
+                        <td><?= $usuarioFetch["email"] ?></td>
+                        <td><?= $usuarioFetch["cpf"] ?></td>
+                        <td><?= $usuarioFetch["telefone"] ?></td>
+                        <td><?= $usuarioFetch["dt_nascimento"]?></td>
+                        <td><?= $usuarioFetch["sexo"] ?></td>
+                        <td><?= $usuarioFetch["situacao"] ?></td>
+                        <td><?= $usuarioFetch["obs"] ?></td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th>Id</th> 
+                        <th>Endereço</th>
+                        <th>Número</th>
+                        <th>Complemento</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>UF</th>
+                        <th>CEP</th>
+                        <th>Perfil</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($usuario as $usuarioFetch) { ?>
+                    <tr>
+                        <td><?= $usuarioFetch["id_usuario"] ?></td>
+                        <td><?= $usuarioFetch["endereco"] ?></td>
+                        <td><?= $usuarioFetch["numero"] ?></td>
+                        <td><?= $usuarioFetch["complemento"] ?></td>
+                        <td><?= $usuarioFetch["bairro"] ?></td>
+                        <td><?= $usuarioFetch["cidade"] ?></td>
+                        <td><?= $usuarioFetch["uf"] ?></td>
+                        <td><?= $usuarioFetch["cep"] ?></td>
+                        <td><?= $usuarioFetch["nome_perfil"] ?></td>
+                        <td>
+                            <a href="../alterar_usuario.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="ALTERAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="../../control/excluir.php?id_usuario=<?= $usuarioFetch["id_usuario"] ?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </div>
     </main>
