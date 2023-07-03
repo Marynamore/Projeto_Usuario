@@ -136,7 +136,7 @@ class UsuarioDAO{
 
     public function listarUsuarios() {
         try{
-            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil ORDER BY id_usuario DESC";
+            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil ORDER BY p.nome_perfil DESC";
    
            $stmt = $this->pdo->prepare($sql);
            $stmt->execute();
