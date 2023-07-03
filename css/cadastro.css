@@ -54,6 +54,7 @@ fieldset {
 .field input[type="tel"],
 .field input[type="number"],
 .field input[type="date"],
+.field input[type="password"],
 .field select,
 .field textarea {
   padding: 0.2em;

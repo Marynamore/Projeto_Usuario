@@ -56,6 +56,7 @@ if(isset($_SESSION['id_usuario'])){
         <h1>Dados a serem Alterados!</h1>
         <!-- Início do formulário -->
         <form action="../control/alterar_cliente_control.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="situacao" value="<?= $usuario->getSituacao()?>">
             <input type="hidden" name="id_usuario" value="<?= $usuario->getId_usuario()?>">
             <fieldset class="grupo">
                 <legend><strong>Dados Pessoais</strong></legend>
@@ -78,7 +79,7 @@ if(isset($_SESSION['id_usuario'])){
                 </div>
                 <div class="field">
                     <label for="senha"><strong>Senha:</strong><br></label>
-                    <input type="text" name="senha" value="<?= $usuario->getSenha()?>" class="input">
+                    <input type="password" name="senha" value="<?= $usuario->getSenha()?>" class="input">
                 </div>
                 <div class="field">
                     <label for="telefone"><strong>Telefone:</strong><br></label>
@@ -90,12 +91,12 @@ if(isset($_SESSION['id_usuario'])){
                 </div>
                 <div class="field">
                     <label for="sexo"><strong>Gênero:</strong></label><br>
-                    <select id="estado" name="sexo" required>
+                    <select id="sexo" name="sexo" required>
                         <option value="" selected disabled>Selecione seu Sexo</option>
-                        <option value="feminino">Feminino</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="naoBinario">Não Binário</option>
-                        <option value="naoDeclarar">Prefiro não declarar</option>
+                        <option value="feminino" <?=($usuario->getSexo() == 'feminino') ? 'selected' : ''; ?>>Feminino</option>
+                        <option value="masculino" <?=($usuario->getSexo() == 'masculino') ? 'selected' : ''; ?>>Masculino</option>
+                        <option value="naoBinario" <?=($usuario->getSexo() == 'naoBinario') ? 'selected' : ''; ?>>Não Binário</option>
+                        <option value="naoDeclarar" <?=($usuario->getSexo() == 'naoDeclarar') ? 'selected' : ''; ?>>Prefiro não declarar</option>
                     </select>
                 </div>
             </fieldset>
@@ -125,43 +126,70 @@ if(isset($_SESSION['id_usuario'])){
                     <label for="complemento"><strong>Complemento:</strong><br></label>
                     <input type="text" name="complemento" value="<?= $usuario->getComplemento()?>" class="input">
                 </div>
+                <div class="field">
+                    <label for="sexo"><strong>Selecione seu perfil:</strong></label><br>
+                    <?php
+                        if(isset($_SESSION['id_perfil']) && $_SESSION['id_perfil'] == 1){
+                            echo'
+                                <select id="fk_id_perfil" name="fk_id_perfil" required>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Cliente</option>
+                                    <option value="3">Moderador</option>
+                                </select>
+                            ';
+                        }elseif(isset($_SESSION['id_perfil']) && $_SESSION['id_perfil'] == 2){
+                            echo '
+                                <select id="fk_id_perfil" name="fk_id_perfil" required>
+                                    <option value="2">Cliente</option>
+                                </select>
+                            ';
+                        }else{
+                            echo '
+                                <select id="fk_id_perfil" name="fk_id_perfil" required>
+                                    <option value="3">Moderador</option>
+                                </select>';
+                        }
+                    ?>
+
+                </div>
                 <div class="field">   
                     <label for="uf"><strong>UF:</strong></label><br>                     
                     <select id="estado" name="uf" required>
                         <option value="" selected disabled>Selecione um Estado</option>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                        <option value="EX">Estrangeiro</option>
+                        <option value="AC" <?=($usuario->getUf() == 'AC') ? 'selected' : ''; ?>>Acre</option>
+                        <option value="AL" <?=($usuario->getUf() == 'AL') ? 'selected' : ''; ?>>Alagoas</option>
+                        <option value="AP" <?=($usuario->getUf() == 'AP') ? 'selected' : ''; ?>>Amapá</option>
+                        <option value="AM" <?=($usuario->getUf() == 'AM') ? 'selected' : ''; ?>>Amazonas</option>
+                        <option value="BA" <?=($usuario->getUf() == 'BA') ? 'selected' : ''; ?>>Bahia</option>
+                        <option value="CE" <?=($usuario->getUf() == 'CE') ? 'selected' : ''; ?>>Ceará</option>
+                        <option value="DF" <?=($usuario->getUf() == 'DF') ? 'selected' : ''; ?>>Distrito Federal</option>
+                        <option value="ES" <?=($usuario->getUf() == 'ES') ? 'selected' : ''; ?>>Espírito Santo</option>
+                        <option value="GO" <?=($usuario->getUf() == 'GO') ? 'selected' : ''; ?>>Goiás</option>
+                        <option value="MA" <?=($usuario->getUf() == 'MA') ? 'selected' : ''; ?>>Maranhão</option>
+                        <option value="MT" <?=($usuario->getUf() == 'MT') ? 'selected' : ''; ?>>Mato Grosso</option>
+                        <option value="MS" <?=($usuario->getUf() == 'MS') ? 'selected' : ''; ?>>Mato Grosso do Sul</option>
+                        <option value="MG" <?=($usuario->getUf() == 'MG') ? 'selected' : ''; ?>>Minas Gerais</option>
+                        <option value="PA" <?=($usuario->getUf() == 'PA') ? 'selected' : ''; ?>>Pará</option>
+                        <option value="PB" <?=($usuario->getUf() == 'PB') ? 'selected' : ''; ?>>Paraíba</option>
+                        <option value="PR" <?=($usuario->getUf() == 'PR') ? 'selected' : ''; ?>>Paraná</option>
+                        <option value="PE" <?=($usuario->getUf() == 'PE') ? 'selected' : ''; ?>>Pernambuco</option>
+                        <option value="PI" <?=($usuario->getUf() == 'PI') ? 'selected' : ''; ?>>Piauí</option>
+                        <option value="RJ" <?=($usuario->getUf() == 'RJ') ? 'selected' : ''; ?>>Rio de Janeiro</option>
+                        <option value="RN" <?=($usuario->getUf() == 'RN') ? 'selected' : ''; ?>>Rio Grande do Norte</option>
+                        <option value="RS" <?=($usuario->getUf() == 'RS') ? 'selected' : ''; ?>>Rio Grande do Sul</option>
+                        <option value="RO" <?=($usuario->getUf() == 'RO') ? 'selected' : ''; ?>>Rondônia</option>
+                        <option value="RR" <?=($usuario->getUf() == 'RR') ? 'selected' : ''; ?>>Roraima</option>
+                        <option value="SC" <?=($usuario->getUf() == 'SC') ? 'selected' : ''; ?>>Santa Catarina</option>
+                        <option value="SP" <?=($usuario->getUf() == 'SP') ? 'selected' : ''; ?>>São Paulo</option>
+                        <option value="SE" <?=($usuario->getUf() == 'SE') ? 'selected' : ''; ?>>Sergipe</option>
+                        <option value="TO" <?=($usuario->getUf() == 'TO') ? 'selected' : ''; ?>>Tocantins</option>
+                        <option value="EX" <?=($usuario->getUf() == 'EX') ? 'selected' : ''; ?>>Estrangeiro</option>
                     </select><br><br><br>
                 </div>
                 <div class="field">
                     <label for="obs"><strong>Observações:</strong><br></label>
-                    <textarea rows="6" style="width: 26em" value="<?= $usuario->getObs()?>" name="obs"></textarea>
+                    <textarea rows="6" style="width: 26em" name="obs" ></textarea>
+                    <input type="hidden" name="obs" value="<?= $usuario->getObs()?>">
                 </div>
             </fieldset> <br><br><br>
             <input type="submit" value="Enviar" name="submit" class="botao">
