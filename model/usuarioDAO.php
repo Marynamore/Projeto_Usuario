@@ -135,8 +135,9 @@ class UsuarioDAO{
 
     public function pesquisarUsuario($nome_usu){
         try {
-            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil WHERE nome_usu LIKE '%{$nome_usu}%' LIMIT 10";
+            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil WHERE nome_usu LIKE ? LIMIT 10";
             $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(1, '%' . $nome_usu . '%', PDO::PARAM_STR);
             $stmt->execute();
 
             $lista_usu = array();

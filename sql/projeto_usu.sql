@@ -79,10 +79,10 @@ DEFAULT CHARACTER SET = utf8;
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nome_usu`, `email`, `senha`, `telefone`, `cpf`, `sexo`, `dt_nascimento`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `cep`, `uf`, `foto`, `situacao`, `fk_id_perfil`) VALUES
-(1, 'Administrador', 'adm@gmail.com', MD5('123'), '(61)77777-6565', '000.000.888-99', 'Masculino', '1989-03-10', 'QNM 11', '11', 'Casa', 'CEILÂNDIA NORTE', 'BRASÍLIA', '72211-111', 'DF', NULL, 'Ativo', 1),
-(2, 'João do Teste', 'jose@email.com', MD5('123456'), '6198887-0909', '333.444.777-77', 'Feminino', '2000-02-01', 'QSC 01 AREA ESP ', '444', 'Ap', 'CEILÂNDIA NORTE', 'BRASILIA', '72-999-02', 'DF', NULL, 'Ativo', 2),
-(3, 'Maya', 'maya@email.com', MD5('123456789'),'6198887-0909', '079.321.888-30', 'naoBinario', '2000-12-08', 'QSC 01 AREA ESP ', '444', 'Ap', 'CEILANDIA NORTE', 'BRASILIA', '72-999-02', 'DF', NULL, 'Ativo', 3);
+INSERT INTO `usuario` (`id_usuario`, `nome_usu`, `email`, `senha`, `telefone`, `cpf`, `sexo`, `dt_nascimento`, `endereco`, `numero`, `complemento`, `bairro`, `cidade`, `cep`, `uf`, `foto`,`obs`, `situacao`, `fk_id_perfil`) VALUES
+(1, 'Administrador', 'adm@gmail.com', MD5('123'), '(61)77777-6565', '000.000.888-99', 'Masculino', '1989-03-10', 'QNM 11', '11', 'Casa', 'CEILÂNDIA NORTE', 'BRASÍLIA', '72211-111', 'DF', NULL, NULL, 'Ativo', 1),
+(2, 'João do Teste', 'jose@email.com', MD5('123456'), '6198887-0909', '333.444.777-77', 'Feminino', '2000-02-01', 'QSC 01 AREA ESP ', '444', 'Ap', 'CEILÂNDIA NORTE', 'BRASILIA', '72-999-02', 'DF', NULL, NULL, 'Ativo', 2),
+(3, 'Maya', 'maya@email.com', MD5('123456789'),'6198887-0909', '079.321.888-30', 'naoBinario', '2000-12-08', 'QSC 01 AREA ESP ', '444', 'Ap', 'CEILANDIA NORTE', 'BRASILIA', '72-999-02', 'DF', NULL, NULL, 'Ativo', 3);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

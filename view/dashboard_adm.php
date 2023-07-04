@@ -10,7 +10,7 @@ if (isset($_SESSION["id_usuario"])) {
     $id_perfil = $_SESSION["id_perfil"];
 
     
-    $usuarioFetch = $usuarioDAO->mostrarFoto($id);
+    $usuarioFoto = $usuarioDAO->mostrarFoto($id);
 } else {
     $nome_usuario = "";
     header("Location: ../index.php?msg=warning&action=perfil");
@@ -105,9 +105,9 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
             <a href="../index.php"><i class="fa-solid fa-house"></i>HOME</a></li>
             <?php
                 if (!empty($nome_usuario)) {
-                    if ($usuarioFetch) {
+                    if ($usuarioFoto) {
                         if ($id_perfil == 1) {
-                            $foto = $usuarioFetch['foto'] ?? "";
+                            $foto = $usuarioFoto['foto'] ?? "";
                             echo '<a href="../view/dashboard_adm.php">';
                             if ($foto) {
                                 echo '<img src="../assets/pessoas/'.$foto.'" alt="Foto do Cliente">';
@@ -143,79 +143,162 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
         <div class="conteudo" id="dashboard">
             <h2>Olá, <?php echo $_SESSION["nome_usu"]; ?>!</h2>
         </div>
-        <div class="conteudo" id="usuario">
-            <h2>Usuários</h2>
-            <?php
-            require_once '../model/usuarioDAO.php';
-            $usuarioDAO = new UsuarioDAO();
+        <?php
+            if (isset($_POST['pesquisar'])) {
+                $nome_usu = $_POST["nome_usu"];
+                $pesquisa_usu = $usuarioDAO->pesquisarUsuario($nome_usu);
 
-            $usuario = $usuarioDAO->listarUsuarios();
-            
-            ?>
+                if (empty($pesquisa_usu)) {
+                    echo '<p>Nenhum usuário encontrado!</p>';
+                } else {
+                    ?>
+                    <div class="conteudo" id="usuario">
+                        <h2>Usuários</h2>
+                        <?php
+                        require_once '../model/usuarioDAO.php';
+                        $usuarioDAO = new UsuarioDAO();
 
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>Perfil</th>
-                        <th>Foto</th>
-                        <th>Nome do Cliente</th>
-                        <th>E-mail</th>
-                        <th>CPF</th>
-                        <th>Telefone</th>
-                        <th>Data de Nascimento</th>
-                        <th>Sexo</th>
-                        <th>Situação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($usuario as $usuarioFetch) { ?>
-                    <tr>
-                        <td><?= $usuarioFetch["nome_perfil"] ?></td>
-                        <td><img src="../assets/pessoas/<?= $usuarioFetch["foto"]?>" alt="Foto do Cliente"></td>
-                        <td><?= $usuarioFetch["nome_usu"] ?></td>
-                        <td><?= $usuarioFetch["email"] ?></td>
-                        <td><?= $usuarioFetch["cpf"] ?></td>
-                        <td><?= $usuarioFetch["telefone"] ?></td>
-                        <td><?= $usuarioFetch["dt_nascimento"]?></td>
-                        <td><?= $usuarioFetch["sexo"] ?></td>
-                        <td><?= $usuarioFetch["situacao"] ?></td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-                <thead>
-                    <tr>
-                        <th>Endereço</th>
-                        <th>Número</th>
-                        <th>Complemento</th>
-                        <th>Bairro</th>
-                        <th>Cidade</th>
-                        <th>UF</th>
-                        <th>CEP</th>
-                        <th>Observação</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($usuario as $usuarioFetch) { ?>
-                    <tr>
-                        <td><?= $usuarioFetch["endereco"] ?></td>
-                        <td><?= $usuarioFetch["numero"] ?></td>
-                        <td><?= $usuarioFetch["complemento"] ?></td>
-                        <td><?= $usuarioFetch["bairro"] ?></td>
-                        <td><?= $usuarioFetch["cidade"] ?></td>
-                        <td><?= $usuarioFetch["uf"] ?></td>
-                        <td><?= $usuarioFetch["cep"] ?></td>
-                        <td><?= $usuarioFetch["obs"] ?></td>
-                        <td>
-                            <a href="alterar_adm_usu.php?id_usuario=<?= $usuarioFetch["id_usuario"]?>" title="ALTERAR"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="../control/excluir.php?id_usuario=<?= $usuarioFetch["id_usuario"]?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-    </main>
+                        $usuario = $usuarioDAO->listarUsuarios();
+                        
+                        ?>
+                        <table id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Perfil</th>
+                                    <th>Foto</th>
+                                    <th>Nome do Cliente</th>
+                                    <th>E-mail</th>
+                                    <th>CPF</th>
+                                    <th>Telefone</th>
+                                    <th>Data de Nascimento</th>
+                                    <th>Sexo</th>
+                                    <th>Situação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($pesquisa_usu as $usuarioFetch) { ?>
+                                <tr>
+                                    <td><?= $usuarioFetch->getId_Perfil()?></td>
+                                    <td><img src="../assets/pessoas/<?= $usuarioFetch->getFoto()?>" alt="Foto do Cliente"></td>
+                                    <td><?= $usuarioFetch->getNome_usu() ?></td>
+                                    <td><?= $usuarioFetch->getEmail() ?></td>
+                                    <td><?= $usuarioFetch->getCpf()?></td>
+                                    <td><?= $usuarioFetch->getTelefone()?></td>
+                                    <td><?= $usuarioFetch->getSexo()?></td>
+                                    <td><?= $usuarioFetch->getDt_nascimento()?></td>
+                                    <td><?= $usuarioFetch->getSituacao()?></td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th>Endereço</th>
+                                    <th>Número</th>
+                                    <th>Complemento</th>
+                                    <th>Bairro</th>
+                                    <th>Cidade</th>
+                                    <th>UF</th>
+                                    <th>CEP</th>
+                                    <th>Observação</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($pesquisa_usu as $usuarioFetch) { ?>
+                                <tr>
+                                    <td><?= $usuarioFetch->getEndereco()?></td>
+                                    <td><?= $usuarioFetch->getNumero()?></td>
+                                    <td><?= $usuarioFetch->getComplemento()?></td>
+                                    <td><?= $usuarioFetch->getBairro()?></td>
+                                    <td><?= $usuarioFetch->getCidade()?></td>
+                                    <td><?= $usuarioFetch->getUf()?></td>
+                                    <td><?= $usuarioFetch->getCep()?></td>
+                                    <td><?= $usuarioFetch->getObs()?></td>
+                                    <td>
+                                        <a href="alterar_adm_usu.php?id_usuario=<?= $usuarioFetch->getId_usuario()?>" title="ALTERAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a href="../control/excluir.php?id_usuario=<?= $usuarioFetch->getId_usuario()?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+            <?php }  
+            } else {
+                ?>
+                <div class="conteudo" id="usuario">
+                    <h2>Usuários</h2>
+                    <?php
+                    require_once '../model/usuarioDAO.php';
+                    $usuarioDAO = new UsuarioDAO();
+
+                    $usuario = $usuarioDAO->listarUsuarios();
+                    
+                    ?>
+                    <table id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Perfil</th>
+                                <th>Foto</th>
+                                <th>Nome do Cliente</th>
+                                <th>E-mail</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>Data de Nascimento</th>
+                                <th>Sexo</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($usuario as $usuarioFetch) { ?>
+                            <tr>
+                                <td><?= $usuarioFetch["nome_perfil"] ?></td>
+                                <td><img src="../assets/pessoas/<?= $usuarioFetch["foto"]?>" alt="Foto do Cliente"></td>
+                                <td><?= $usuarioFetch["nome_usu"] ?></td>
+                                <td><?= $usuarioFetch["email"] ?></td>
+                                <td><?= $usuarioFetch["cpf"] ?></td>
+                                <td><?= $usuarioFetch["telefone"] ?></td>
+                                <td><?= $usuarioFetch["dt_nascimento"]?></td>
+                                <td><?= $usuarioFetch["sexo"] ?></td>
+                                <td><?= $usuarioFetch["situacao"] ?></td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Endereço</th>
+                                <th>Número</th>
+                                <th>Complemento</th>
+                                <th>Bairro</th>
+                                <th>Cidade</th>
+                                <th>UF</th>
+                                <th>CEP</th>
+                                <th>Observação</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($usuario as $usuarioFetch) { ?>
+                            <tr>
+                                <td><?= $usuarioFetch["endereco"] ?></td>
+                                <td><?= $usuarioFetch["numero"] ?></td>
+                                <td><?= $usuarioFetch["complemento"] ?></td>
+                                <td><?= $usuarioFetch["bairro"] ?></td>
+                                <td><?= $usuarioFetch["cidade"] ?></td>
+                                <td><?= $usuarioFetch["uf"] ?></td>
+                                <td><?= $usuarioFetch["cep"] ?></td>
+                                <td><?= $usuarioFetch["obs"] ?></td>
+                                <td>
+                                    <a href="alterar_adm_usu.php?id_usuario=<?= $usuarioFetch["id_usuario"]?>" title="ALTERAR"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="../control/excluir.php?id_usuario=<?= $usuarioFetch["id_usuario"]?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+        <?php } ?> 
+    </main>   
 </body>
 <script>
     document.getElementById('pesquisar').addEventListener('input', function() {
@@ -241,3 +324,4 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
     });
 </script>
 </html>
+
