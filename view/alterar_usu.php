@@ -11,6 +11,7 @@ if(isset($_SESSION['id_usuario'])){
     $id_perfil = $_SESSION['id_perfil'];
 
     $usuario = $usuarioDAO->buscarPorID($id);
+    $usuarioFetch = $usuarioDAO->mostrarFoto($id);
 }else{
     $nome_usuario = "";
     header("Location: ../index.php?msg=Usuário não encontrado");
@@ -44,8 +45,15 @@ if(isset($_SESSION['id_usuario'])){
             <a href="http://" target="_blank"><i class="fa-solid fa-headphones"></i>AJUDA</a>
             <?php
                 if (!empty($nome_usuario)) {
-                    if ($id_perfil == 2) {
-                        echo '<a href="perfil_cliente.php"><i class="fa-solid fa-user"></i>'.$nome_usuario.'</a>';
+                    if ($id_perfil == 1 || $id_perfil == 2 || $id_perfil == 3) {
+                        $foto = $usuarioFetch['foto'] ?? "";
+                        echo '<a href="perfil_usu.php">';
+                        if ($foto) {
+                                echo '<img src="../assets/pessoas/'.$foto.'" alt="Foto do Cliente">';
+                            } else {
+                                echo '<i class="fa-solid fa-user"></i>'; // Ícone no lugar da foto
+                            }
+                        echo $nome_usuario.'</a>';
                         echo '<a class="border1" href="../control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
                     }
                 }
@@ -143,14 +151,13 @@ if(isset($_SESSION['id_usuario'])){
                                     <option value="2">Cliente</option>
                                 </select>
                             ';
-                        }else{
+                        }elseif(isset($_SESSION['id_perfil']) && $_SESSION['id_perfil'] == 3){
                             echo '
                                 <select id="fk_id_perfil" name="fk_id_perfil" required>
                                     <option value="3">Moderador</option>
                                 </select>';
                         }
                     ?>
-
                 </div>
                 <div class="field">   
                     <label for="uf"><strong>UF:</strong></label><br>                     
@@ -188,8 +195,7 @@ if(isset($_SESSION['id_usuario'])){
                 </div>
                 <div class="field">
                     <label for="obs"><strong>Observações:</strong><br></label>
-                    <textarea rows="6" style="width: 26em" name="obs" ></textarea>
-                    <input type="hidden" name="obs" value="<?= $usuario->getObs()?>">
+                    <textarea rows="6" style="width: 26em" name="obs" value="<?= $usuario->getObs()?>" ></textarea>
                 </div>
             </fieldset> <br><br><br>
             <input type="submit" value="Enviar" name="submit" class="botao">

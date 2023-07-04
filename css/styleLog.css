@@ -45,6 +45,15 @@ fieldset {
   font-weight: 900;
 }
 
+.field img {
+  max-width: 6em;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  padding: 3px;
+  background-color: #DDC6A4;
+}
+
 
 legend {
   font-weight: bold;

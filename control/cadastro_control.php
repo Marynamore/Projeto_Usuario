@@ -11,14 +11,8 @@ require_once '../model/usuarioDAO.php';
 // recuperei os dados do formulario
 $nome           = strip_tags($_POST["nome_usu"]);
 $cpf            = strip_tags($_POST["cpf"]);
-$telefone = strip_tags($_POST["telefone"]);
-
-if(isset($_POST["sexo"])){
-    $sexo = strip_tags($_POST["sexo"]);
-} else {
-$sexo = "";
-}   
-
+$telefone       = strip_tags($_POST["telefone"]);
+$sexo           = $_POST["sexo"];
 $dt_nascimento  = $_POST["dt_nascimento"];
 $endereco       = strip_tags($_POST["endereco"]);
 $numero         = strip_tags($_POST["numero"]);
@@ -30,8 +24,9 @@ $cep            = strip_tags($_POST["cep"]);
 $email          = strip_tags($_POST["email"]); 
 $senha          = $_POST["senha"];
 $situacao       = $_POST["situacao"];
-$id_perfil         = $_POST["id_perfil"];
-$foto = $_FILES['foto'];
+$id_perfil      = $_POST["id_perfil"];
+$obs            = $_POST["obs"];
+$foto           = $_FILES['foto'];
 
 // Verifica se o campo de upload de arquivo foi enviado e se não há erros
 if ($foto['error'] === UPLOAD_ERR_OK){
@@ -59,35 +54,24 @@ $usuarioDTO->setEmail($email);
 $usuarioDTO->setSenha($senha);
 $usuarioDTO->setSituacao($situacao);
 $usuarioDTO->setId_perfil($id_perfil);
-
+$usuarioDTO->setObs($obs);
 
 $usuarioDAO = new UsuarioDAO(); // criando objeto DAO de usuario
-$usuarioCadastrado = $usuarioDAO->cadastrarUsuario($usuarioDTO);
+$cadastrado_sucesso = $usuarioDAO->cadastrarUsuario($usuarioDTO);
 
-if ($usuarioCadastrado) {
-    $msg = "Usuário Cadastrado com sucesso!";
-    echo "<script>";
-    echo "Swal.fire({
-            title: 'Sucesso!',
-            text: '{$msg}',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = '../view/cadastro_usuario.php';
-        });";
-    echo "</script>";
+    if ($cadastrado_sucesso) {
+        $id_perfil = $_SESSION["id_perfil"];
+
+        if (in_array($id_perfil, [2, 3])) {
+            header("location:../index.php?msg=success&action=cadastro");
+            exit;
+        } elseif (in_array($id_perfil, [1])) {
+            header("location:../view/dashboard_adm.php?msg=success&action=cadastro");
+            exit;
+        }
+    }
 } else {
-    $msg = "Erro ao cadastrar Usuário!";
-    echo "<script>";
-    echo "Swal.fire({
-            title: 'Erro!',
-            text: '{$msg}',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = '../view/cadastro_usuario.php';
-        });";
-    echo "</script>";
-}
+// Redirecionar para a página do administrador com mensagem de erro
+header("location:../view/dashboard_adm.php?msg=error&action=cadastro");
 }
 ?>

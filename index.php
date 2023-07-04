@@ -1,13 +1,18 @@
 <?php
 session_start();
+require_once './model/usuarioDAO.php';
 
 if (isset($_SESSION["id_usuario"])) {
     $usuarioLogado = $_SESSION["nome_usu"];
-    $id_usuarioLogado = $_SESSION["id_usuario"];
+    $id = $_SESSION["id_usuario"];
     $id_perfil = $_SESSION["id_perfil"];
+
+    $usuarioDAO = new UsuarioDAO();
+    $usuarioFetch = $usuarioDAO->mostrarFoto($id);
 } else {
     $usuarioLogado = null;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +34,19 @@ if (isset($_SESSION["id_usuario"])) {
     <title>Meu Projeto</title>
     <script>
         function exibirAlerta(tipo, mensagem) {
-            let title = tipo === 'success' ? 'Login realizado com Sucesso!' : 'OPS! Email e/ou Senha Inválidos';
+            let title;
+            if (tipo === 'success') {
+                if (mensagem === 'Login realizado com Sucesso!') {
+                    title = 'Login realizado com Sucesso!';
+                } else if (mensagem === 'Usuário realizado com Sucesso!') {
+                    title = 'Usuário realizado com Sucesso!';
+                } else if (mensagem === 'Cadastro realizado com Sucesso!') {
+                    title = 'Cadastro realizado com Sucesso!';
+                }
+            } else {
+                title = 'OPS! Email e/ou Senha Inválidos';
+            }
+
             Swal.fire({
                 icon: tipo,
                 title: title,
@@ -37,7 +54,14 @@ if (isset($_SESSION["id_usuario"])) {
             });
         }
     </script>
-
+    <script>
+        function fundPageCli() {
+            alert("Em breve:\n A página do Cliente estará diponível");
+        }
+        function fundPageMode() {
+            alert("Em breve:\n A página do Moderador estará diponível");
+        }
+    </script>
 </head>
 <body>
   <!-- MENU CONFORME LOGIN -->
@@ -49,15 +73,39 @@ if (isset($_SESSION["id_usuario"])) {
             <a href="index.php"><i class="fa-solid fa-house"></i>HOME</a></li>
             <?php
                 if (!empty($usuarioLogado)) {
-                    if ($id_perfil == 1) {
-                        echo '<a href="./view/perfil_adm.php"><i class="fa-solid fa-user"></i>Painel Administrador</a>';
-                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
-                    } elseif ($id_perfil == 3) {
-                        echo '<a href="./view/perfil_moderador.php"><i class="fa-solid fa-users"></i>PAINEL MODERADOR</a>';
-                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
-                    } elseif ($id_perfil == 2) {
-                        echo '<a href="./view/perfil_cliente.php?id_usuario=' . $id_usuarioLogado . '" onclick="funcPerfil()"><i class="fa-solid fa-user"></i>' . $usuarioLogado . '</a>';
-                        echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
+                    if ($usuarioFetch) {
+                        if ($id_perfil == 1) {
+                            $foto = $usuarioFetch['foto'] ?? "";
+                            echo '<a href="./view/dashboard_adm.php">';
+                            if ($foto) {
+                                echo '<img src="./assets/pessoas/'.$foto.'" alt="Foto do Cliente">';
+                            } else {
+                                echo '<i class="fa-solid fa-user"></i>'; // Ícone no lugar da foto
+                            }
+                            echo 'Painel Administrador</a>';
+
+                            echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
+                        } elseif ($id_perfil == 2) {
+                            $foto = $usuarioFetch['foto'] ?? "";
+                            echo '<a href="./view/perfil_usu.php?id_usuario=' . $id . '" onclick="funcPerfil()">';
+                            if ($foto) {
+                                echo '<img src="./assets/pessoas/'.$foto.'" alt="Foto do Cliente">';
+                            } else {
+                                echo '<i class="fa-solid fa-user"></i>'; // Ícone no lugar da foto
+                            }
+                            echo $usuarioLogado . '</a>';
+                            echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
+                        } elseif ($id_perfil == 3) {
+                            $foto = $usuarioFetch['foto'] ?? "";
+                            echo '<a href="./view/perfil_usu.php">';
+                            if ($foto) {
+                                echo '<img src="./assets/pessoas/'.$foto.'" alt="Foto do Cliente">';
+                            } else {
+                                echo '<i class="fa-solid fa-user"></i>'; // Ícone no lugar da foto
+                            }
+                            echo 'PAINEL MODERADOR</a>';
+                            echo '<a class="border1" href="./control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
+                        }
                     }
                 } else {
                     echo '<a href="./view/cadastro_usuario.php"><i class="fa-solid fa-user"></i>CADASTRO</a>';
@@ -68,18 +116,72 @@ if (isset($_SESSION["id_usuario"])) {
         </nav>
     </header>
     <?php
-    if (isset($_GET['msg'])) {
-        if ($_GET['msg'] === 'success') {
-            $tipo = 'success';
-            $mensagem = 'Login realizado com Sucesso!';
-        } elseif ($_GET['msg'] === 'error') {
-            $tipo = 'error';
-            $mensagem = 'OPS! Email e/ou Senha Inválidos';
+        if (isset($_GET['msg'])) {
+            if ($_GET['msg'] === 'success') {
+                $tipo = 'success';
+                if ($_GET['action'] === 'login') {
+                    $mensagem = 'Login realizado com Sucesso!';
+                } elseif ($_GET['action'] === 'alterar') {
+                    $mensagem = 'Atualização feita com Sucesso!';
+                } elseif ($_GET['action'] === 'cadastro') {
+                    $mensagem = 'Cadastro realizado com Sucesso!';
+                }  elseif ($_GET['action'] === 'excluir') {
+                    $mensagem = 'Usuário excluido com Sucesso!';
+                }else {
+                    // Ação desconhecida
+                    $tipo = 'error';
+                    $mensagem = 'Ação desconhecida';
+                }
+            }else if ($_GET['msg'] === 'warning') {
+                $tipo = 'warning';
+                if ($_GET['action'] === 'perfil') {
+                    $mensagem = 'OPS! É necessário fazer Login';
+                } elseif ($_GET['action'] === 'alterar') {
+                    $mensagem = 'OPS! Erro ao altera Usuário!';
+                } elseif ($_GET['action'] === 'cadastro') {
+                    $mensagem = 'OPS! Erro ao altera Usuário!';
+                }elseif ($_GET['action'] === 'excluir') {
+                    $mensagem = 'OPS! Erro ao excluir Usuário!';
+                } else {
+                    // Valor não esperado em $_GET['msg']
+                    $tipo = 'error';
+                    $mensagem = 'Mensagem de erro desconhecida';
+                }
+            }else if ($_GET['msg'] === 'error') {
+                $tipo = 'error';
+                if ($_GET['action'] === 'login') {
+                    $mensagem = 'ERRO! Email e/ou Senha Inválidos';
+                } elseif ($_GET['action'] === 'alterar') {
+                    $mensagem = 'ERRO ao altera Usuário!';
+                } elseif ($_GET['action'] === 'cadastro') {
+                    $mensagem = 'ERRO ao altera Usuário!';
+                }elseif ($_GET['action'] === 'excluir') {
+                    $mensagem = 'ERRO ao excluir Usuário!';
+                } else {
+                    // Valor não esperado em $_GET['msg']
+                    $tipo = 'error';
+                    $mensagem = 'Mensagem de erro desconhecida';
+                }
+            }
+        } else {
+            // $_GET['msg'] não está definida
+            $tipo = null;
+            $mensagem = null;
         }
-
-        echo '<script>exibirAlerta("' . $tipo . '", "' . $mensagem . '");</script>';
-    }
     ?>
+    <script>
+        function exibirAlerta(tipo, titulo, mensagem) {
+            Swal.fire({
+                icon: tipo,
+                title: titulo,
+                text: mensagem,
+            });
+        }
+        // Verifica se o tipo e a mensagem estão definidos e chama a função exibirAlerta
+        <?php if ($tipo && $mensagem): ?>
+        exibirAlerta("<?php echo $tipo; ?>", "<?php echo $mensagem; ?>");
+        <?php endif; ?>
+    </script>
 
 <!--POP LOGIN-->
     <div class="overlay"></div>
@@ -117,7 +219,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Cliente</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para clientes.</p>
                     <br>
-                    <a href="./view/perfil_cliente.php" class="btn">Acesse</a>
+                    <a href="" class="btn" onclick="fundPageCli()">Acesse</a>
                 </div>
             </aside>
             <aside>
@@ -126,7 +228,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Moderador</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para moderadores.</p>
                     <br>
-                    <a href="./view/pagina_moderador.php" class="btn">Acesse</a>
+                    <a href="" class="btn" onclick="fundPageMode()">Acesse</a>
                 </div>
             </aside>
             <aside>

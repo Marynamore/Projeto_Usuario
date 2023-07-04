@@ -35,11 +35,10 @@ if ($foto['error'] === UPLOAD_ERR_OK){
     $caminho_destino = '../assets/pessoas/' . $nome_arquivo;
     move_uploaded_file($caminho_temporario, $caminho_destino);
 
-$usuarioDTO = new UsuarioDTO($nome,$email,$senha);  
+$usuarioDTO = new UsuarioDTO();  
 $usuarioDTO->setNome_usu($nome);
 $usuarioDTO->setCpf($cpf);
 $usuarioDTO->setTelefone($telefone);
-$usuarioDTO->setCpf($cpf);
 $usuarioDTO->setSexo($sexo);
 $usuarioDTO->setDt_nascimento($dt_nascimento);
 $usuarioDTO->setEndereco($endereco);
@@ -58,26 +57,22 @@ $usuarioDTO->setObs($obs);
 $usuarioDTO->setId_usuario($id);
 
 $usuarioDAO = new UsuarioDAO(); // criando objeto DAO de usuario
-$usuarioCadastrado = $usuarioDAO->atualizarUsuarioPorID($usuarioDTO);
+$atualizacao_sucesso = $usuarioDAO->atualizarUsuarioPorID($usuarioDTO);
 
-    // Verificar se o usuário é administrador, moderador, colecionador ou usuário comum
-    if ($success) {
-        $msg = "Usuário alterado com sucesso!";
-    } else {
-        $msg = "Erro ao alterar o usuário";
+if ($atualizacao_sucesso) {
+
+    $id_perfil = $_SESSION["id_perfil"];
+
+    if (in_array($id_perfil, [2, 3])) {
+        header("location:../index.php?msg=success&action=alterar");
+        exit;
+    } elseif (in_array($id_perfil, [1])) {
+        header("location:../view/dashboard_adm.php?msg=success&action=alterar");
+        exit;
     }
-
-
-    // Exibir saída específica para cada perfil
-    if ($_SESSION['id_perfil'] == 1) {
-        header("Location: ../view/dashboard_adm.php?msg=" . urlencode($msg));
-    } elseif ($_SESSION['id_perfil'] == 2) {
-        header("Location: ../index.php?msg=" . urlencode($msg));
-    } elseif ($_SESSION['id_perfil'] == 3) {
-        header("Location: ../index.php?msg=" . urlencode($msg));
-    }
+}
 }
 } else {
 // Redirecionar para a página do administrador com mensagem de erro
-header("location:../view/dashboard/listausuarioadm.php?msg=" . urlencode("Erro ao alterar o usuário"));
+header("location:../view/dashboard_adm.php?msg=error&action=alterar");
 }

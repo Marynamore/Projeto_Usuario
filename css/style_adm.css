@@ -32,12 +32,26 @@ h1{
 
 table {
   border-collapse: collapse;
-  width: 100%;
+  margin-bottom: 2em;
 }
 
 th, td {
   text-align: center;
   padding: 8px;
+  font-weight: bolder;
+}
+
+th{
+  color: #eee;
+}
+
+img {
+  max-width: 8em;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  padding: 3px;
+  background-color: #DDC6A4;
 }
 
 th {
@@ -50,37 +64,38 @@ tr:nth-child(even) {
 
 /* input Pesquisar */
 .search-text {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
   
-  .search-btn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #525050;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+.search-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #525050;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
   
  
- /* FIM DO INPUT PESQUISAR */
+/* FIM DO INPUT PESQUISAR */
 .menu-item button {
-padding: 1.2em;
-margin: 1em;
-border: none;
-border-radius: 4px;
-cursor: pointer;
+  padding: 1.2em;
+  margin: 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bolder;
 }
 
 
 .menu-item button {
-background-color: #525050;
-color: white;
-text-decoration: none;
+  background-color: #525050;
+  color: white;
+  text-decoration: none;
 }
 
 .menu-item button:hover{

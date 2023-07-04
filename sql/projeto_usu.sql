@@ -74,6 +74,7 @@ CREATE TABLE `usuario` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
 --
 -- Extraindo dados da tabela `usuario`
 --

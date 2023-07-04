@@ -5,13 +5,14 @@ require_once '../model/usuarioDAO.php';
 $usuarioDAO = new UsuarioDAO();
 
 if (isset($_SESSION["id_usuario"])) {
-    $usuarioLogado = $_SESSION["nome_usu"];
+    $nome_usuario = $_SESSION["nome_usu"];
     $id = $_SESSION["id_usuario"];
     $id_perfil = $_SESSION["id_perfil"];
 
     $usuario = $usuarioDAO->buscarPorID($id);
+    $usuarioFetch = $usuarioDAO->mostrarFoto($id);
 } else {
-    $usuarioLogado = "";
+    $nome_usuario = "";
     header("Location: ../index.php?msg=Usuário não encontrado");
     exit();
 }
@@ -43,9 +44,16 @@ if (isset($_SESSION["id_usuario"])) {
             <a href="../index.php"><i class="fa-solid fa-house"></i>HOME</a></li>
             <a href="http://" target="_blank"><i class="fa-solid fa-headphones"></i>AJUDA</a>
             <?php
-                if (!empty($usuarioLogado)) {
-                    if ($id_perfil == 2) {
-                        echo '<a href="perfil_adm.php"><i class="fa-solid fa-user"></i>'.$usuarioLogado.'</a>';
+                if (!empty($nome_usuario)) {
+                    if ($id_perfil == 1 || $id_perfil == 2 || $id_perfil == 3) {
+                        $foto = $usuarioFetch['foto'] ?? "";
+                        echo '<a href="perfil_usu.php">';
+                        if ($foto) {
+                                echo '<img src="../assets/pessoas/'.$foto.'" alt="Foto do Cliente">';
+                            } else {
+                                echo '<i class="fa-solid fa-user"></i>'; // Ícone no lugar da foto
+                            }
+                        echo $nome_usuario.'</a>';
                         echo '<a class="border1" href="../control/control_sair.php" class="item_menu"><i class="fa-solid fa-right-from-bracket"></i>SAIR</a>';
                     }
                 }
@@ -57,15 +65,18 @@ if (isset($_SESSION["id_usuario"])) {
         <div class="dados">
             <fieldset class="grupo">
                 <legend><strong>Dados Pessoais</strong></legend>
-                <?php if (!empty($usuario)) { ?>
-                    <img class='profile' src="../assets/pessoas/<?= $usuario->getFoto(); ?>" alt="">
-                <?php } ?>
+                <div class="field">
+                    <?php if (!empty($usuario)) { ?>
+                        <img class='profile' src="../assets/pessoas/<?= $usuario->getFoto(); ?>" alt="">
+                    <?php } ?>
+                </div>
                 <p class="field"><strong>Nome:</strong> <br><?= $usuario->getNome_usu() ?></p>
-                <p class="field"><strong>Gênero:</strong> <br><?= $usuario->getSexo() ?></p>
+                <p class="field"><strong>Sexo:</strong> <br><?= $usuario->getSexo() ?></p>
                 <p class="field"><strong>Data de Nascimento:</strong> <br><?= $usuario->getDt_nascimento() ?></p>
                 <p class="field"><strong>Telefone:</strong> <br><?= $usuario->getTelefone() ?></p>
                 <p class="field"><strong>Email:</strong> <br><?= $usuario->getEmail() ?></p>
-                <p class="field"><strong>CPF ou CNPJ:</strong> <br><?= $usuario->getCpf() ?></p>
+                <!-- <p class="field"><strong>Senha:</strong> <br><?= $usuario->getSenha() ?></p> -->
+                <p class="field"><strong>CPF:</strong> <br><?= $usuario->getCpf() ?></p>
             </fieldset>
             <fieldset class="grupo">
                 <legend>Endereço</legend>
@@ -76,8 +87,9 @@ if (isset($_SESSION["id_usuario"])) {
                 <p class="field"><strong>Cidade:</strong> <br><?= $usuario->getCidade() ?></p>
                 <p class="field"><strong>CEP:</strong> <br><?= $usuario->getCep() ?></p>
                 <p class="field"><strong>UF:</strong> <br><?= $usuario->getUF() ?></p>
+                <p class="field"><strong>Observação:</strong> <br><?= $usuario->getObs() ?></p>
             </fieldset>
-            <a class="botao" href="./alterar_cliente.php?id_usuario=<?= $usuario->getId_usuario() ?>">ALTERAR</a>
+            <a class="botao" href="./alterar_usu.php?id_usuario=<?= $usuario->getId_usuario() ?>">ALTERAR</a>
             <a class="botao" href="../control/excluir.php?id_usuario=<?= $usuario->getId_usuario() ?>" onclick="return confirm('Tem certeza de que deseja excluir o usuário?')">EXCLUIR</a>
         </div>
     </main>

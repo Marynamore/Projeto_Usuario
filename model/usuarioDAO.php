@@ -102,12 +102,12 @@ class UsuarioDAO{
 
     public function atualizarUsuarioPorID(UsuarioDTO $usuarioDTO) {
         try {
-            $sql = "UPDATE usuario SET nome_usu=?, email=?, senha=?, cpf=?, telefone=?, sexo=?, dt_nascimento=?, endereco=?, numero=?,complemento=?, bairro=?, cidade=?, uf=?, cep=?, fk_id_perfil=?, situacao=?, foto=? obs=? WHERE id_usuario=?";
+            $sql = "UPDATE usuario SET nome_usu=?, email=?, senha=?, cpf=?, telefone=?, sexo=?, dt_nascimento=?, endereco=?, numero=?,complemento=?, bairro=?, cidade=?, uf=?, cep=?, fk_id_perfil=?, situacao=?, foto=?, obs=? WHERE id_usuario=?";
             $stmt = $this->pdo->prepare($sql);
 
             $stmt->bindValue(1,$usuarioDTO->getNome_usu()); //associa o valor nome a 1a interrogação
             $stmt->bindValue(2,$usuarioDTO->getEmail()); //associa o valor email a 2a interrogação
-            $stmt->bindValue(3,$usuarioDTO->getSenha()); //associa o valor senha a 3a interrogação
+            $stmt->bindValue(3,MD5($usuarioDTO->getSenha())); //associa o valor senha a 3a interrogação
             $stmt->bindValue(4, $usuarioDTO->getCpf()); //associa o valor cpf a 4a interrogação
             $stmt->bindValue(5, $usuarioDTO->getTelefone()); //associa o valor telefone a 5a interrogação
             $stmt->bindValue(6, $usuarioDTO->getSexo()); //associa o valor sexo a 6a interrogação
@@ -133,10 +133,48 @@ class UsuarioDAO{
         }
     }//fim do metodo atualizarUsuarioPorID
 
+    public function pesquisarUsuario($nome_usu){
+        try {
+            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil WHERE nome_usu LIKE '%{$nome_usu}%' LIMIT 10";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
+            $lista_usu = array();
+            if($stmt->rowCount() > 0){
+            while ($usuarioFetch = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $usuarioDTO = new usuarioDTO();
+                $usuarioDTO->setId_usuario($usuarioFetch['id_usuario']);
+                $usuarioDTO->setFoto($usuarioFetch['foto']);
+                $usuarioDTO->setNome_usu($usuarioFetch['nome_usu']);
+                $usuarioDTO->setDt_nascimento($usuarioFetch['dt_nascimento']);
+                $usuarioDTO->setSexo($usuarioFetch['sexo']);
+                $usuarioDTO->setEmail($usuarioFetch['email']);
+                $usuarioDTO->setTelefone($usuarioFetch['telefone']);
+                $usuarioDTO->setEndereco($usuarioFetch['endereco']);
+                $usuarioDTO->setComplemento($usuarioFetch['complemento']);
+                $usuarioDTO->setNumero($usuarioFetch['numero']);
+                $usuarioDTO->setCpf($usuarioFetch['cpf']);
+                $usuarioDTO->setBairro($usuarioFetch['bairro']);
+                $usuarioDTO->setCidade($usuarioFetch['cidade']);
+                $usuarioDTO->setCep($usuarioFetch['cep']);
+                $usuarioDTO->setUf($usuarioFetch['uf']);
+                $usuarioDTO->setObs($usuarioFetch['obs']);
+                $usuarioDTO->setId_perfil($usuarioFetch['nome_perfil']);
+                $lista_usu[] = $usuarioDTO;
+            }
+            return $lista_usu;
+        } else {
+            echo '<p>Nenhum usuário encontrado!</p>';
+        }
+
+        } catch (PDOException $exc) {
+            echo $exc->getMessage();
+        }
+    }
 
     public function listarUsuarios() {
         try{
-            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil ORDER BY p.nome_perfil DESC";
+            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil ORDER BY id_usuario DESC";
    
            $stmt = $this->pdo->prepare($sql);
            $stmt->execute();
@@ -168,6 +206,42 @@ class UsuarioDAO{
            }else{
                echo '<p>Nenhum usuario adicionado ainda!</p>';
            }
+           }catch(PDOException $exc){
+           echo $exc->getMessage();
+       }
+    }//fim do metodo listarUsuario
+
+    public function mostrarFoto($id) {
+        try{
+            $sql = "SELECT * FROM usuario u INNER JOIN perfil p ON u.fk_id_perfil = p.id_perfil WHERE id_usuario=?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(1, $id);
+            $stmt->execute();
+
+            $usuarioFetch = $stmt->fetch(PDO::FETCH_ASSOC);
+
+           if($usuarioFetch != null){
+                $usuarioDTO = new usuarioDTO();
+                $usuarioDTO->setId_usuario($usuarioFetch['id_usuario']);
+                $usuarioDTO->setFoto($usuarioFetch['foto']);
+                $usuarioDTO->setNome_usu($usuarioFetch['nome_usu']);
+                $usuarioDTO->setDt_nascimento($usuarioFetch['dt_nascimento']);
+                $usuarioDTO->setSexo($usuarioFetch['sexo']);
+                $usuarioDTO->setEmail($usuarioFetch['email']);
+                $usuarioDTO->setTelefone($usuarioFetch['telefone']);
+                $usuarioDTO->setEndereco($usuarioFetch['endereco']);
+                $usuarioDTO->setComplemento($usuarioFetch['complemento']);
+                $usuarioDTO->setNumero($usuarioFetch['numero']);
+                $usuarioDTO->setCpf($usuarioFetch['cpf']);
+                $usuarioDTO->setBairro($usuarioFetch['bairro']);
+                $usuarioDTO->setCidade($usuarioFetch['cidade']);
+                $usuarioDTO->setCep($usuarioFetch['cep']);
+                $usuarioDTO->setUf($usuarioFetch['uf']);
+                $usuarioDTO->setObs($usuarioFetch['obs']);
+                $usuarioDTO->setId_perfil($usuarioFetch['nome_perfil']);
+                    return $usuarioFetch;
+               } 
+               return null;
            }catch(PDOException $exc){
            echo $exc->getMessage();
        }

@@ -19,13 +19,13 @@ if (!empty($usuarioLogado)) {
     $id_perfil = $_SESSION["id_perfil"];
 
     if (in_array($id_perfil, [2, 3])) {
-        header("location:../index.php?msg=success");
+        header("location:../index.php?msg=success&action=login");
         exit;
     } elseif (in_array($id_perfil, [1])) {
-        header("location:../view/dashboard_adm.php?msg=Login realizado com sucesso!");
+        header("location:../view/dashboard_adm.php?msg=success&action=login");
         exit;
     }
 } else {
-    header("location:../index.php?msg=error");
+    header("location:../index.php?msg=error&action=login");
     exit;
 }
