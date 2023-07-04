@@ -235,12 +235,10 @@ margin-bottom: 30px;
 /*INICIO DOBRA RODAPE*/
 
 .main_footer{
-    max-width: 1300px;
     padding: 40px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 0 auto;
     color: #eee;
     background-color: #525050;
     font-weight: 600;
