@@ -46,7 +46,7 @@ Todas as contribuições passarão por uma revisão antes de serem incorporadas 
 
 ## Licença
 
-Este projeto está licenciado sob a [Apache 2.0](LICENSE).
+Este projeto está licenciado sob a [MIT](LICENSE).
 
 ## Contato
 
