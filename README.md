@@ -25,13 +25,13 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 -  **PHP:** É necessário ter o interpretador PHP instalado;
 - **XAMPP:** Ele fornece um servidor web Apache para executar seus scripts, o interpretador PHP, o banco de dados MySQL e o servidor de banco de dados MariaDB, juntamente com outras ferramentas e utilitários.
 
-## Configuração do servidor
+## :paperclip: Configuração do servidor
 
 Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local:
 
 1.  :small_blue_diamond: Ao instalar o XAMPP, um diretório será criado no seu computador para armazenar todos os arquivos e componentes.
       O diretório padrão é "C:\xampp" no Windows e "/opt/lampp" no Linux.
-2.  :small_red_diamond: Dentro desse diretório, você encontrará subdiretórios para cada componente, como "apache" para o servidor web Apache, "php" para o interpretador PHP e "mysql" para o banco de dados MySQL/MariaDB, "htdocs" é onde você deve colocar seus arquivos PHP para que possam ser executados pelo servidor we.
+2.  :small_blue_diamond: Dentro desse diretório, você encontrará subdiretórios para cada componente, como "apache" para o servidor web Apache, "php" para o interpretador PHP e "mysql" para o banco de dados MySQL/MariaDB, "htdocs" é onde você deve colocar seus arquivos PHP para que possam ser executados pelo servidor we.
 3.  :small_blue_diamond: Clone este repositório em seu ambiente local.
 4.  :small_blue_diamond: Configure as informações de conexão com o banco de dados no arquivo `config.php`.
 5.  :small_blue_diamond: Importe o arquivo `database.sql` para criar a estrutura do banco de dados.
@@ -62,6 +62,8 @@ Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local
       ``` 
 *** 
 <br><br>
+
+
 
 ## Contribuição
 
