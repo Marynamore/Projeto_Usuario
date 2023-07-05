@@ -53,7 +53,7 @@
                 </div>
                 <div class="field">
                     <label for="senha"><strong>Senha:</strong><br></label>
-                    <input type="text" name="senha" placeholder="Digite sua Senha" class="input">
+                    <input type="password" name="senha" placeholder="Digite sua Senha" class="input">
                 </div>
                 <div class="field">
                     <label for="telefone"><strong>Telefone:</strong><br></label>

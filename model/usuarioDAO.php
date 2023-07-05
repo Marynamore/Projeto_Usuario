@@ -38,7 +38,7 @@ class UsuarioDAO{
             $stmt = $this->pdo->prepare($sql); //prepara sql a ser executada
             $stmt->bindValue(1,$usuarioDTO->getNome_usu()); //associa o valor nome usuario a 1a interrogação
             $stmt->bindValue(2,$usuarioDTO->getEmail()); //associa o valor email a 2a interrogação
-            $stmt->bindValue(3,MD5($usuarioDTO->getSenha())); //associa o valor senha a 3a interrogação
+            $stmt->bindValue(3, MD5($usuarioDTO->getSenha())); //associa o valor senha a 3a interrogação
             $stmt->bindValue(2, $usuarioDTO->getCpf()); //associa o valor cpf a 2a interrogação
             $stmt->bindValue(4, $usuarioDTO->getTelefone()); //associa o valor telefone a 4a interrogação
             $stmt->bindValue(5, $usuarioDTO->getSexo()); //associa o valor sexo a 5a interrogação
@@ -107,7 +107,7 @@ class UsuarioDAO{
 
             $stmt->bindValue(1,$usuarioDTO->getNome_usu()); //associa o valor nome a 1a interrogação
             $stmt->bindValue(2,$usuarioDTO->getEmail()); //associa o valor email a 2a interrogação
-            $stmt->bindValue(3,MD5($usuarioDTO->getSenha())); //associa o valor senha a 3a interrogação
+            $stmt->bindValue(3, MD5($usuarioDTO->getSenha())); //associa o valor senha a 3a interrogação
             $stmt->bindValue(4, $usuarioDTO->getCpf()); //associa o valor cpf a 4a interrogação
             $stmt->bindValue(5, $usuarioDTO->getTelefone()); //associa o valor telefone a 5a interrogação
             $stmt->bindValue(6, $usuarioDTO->getSexo()); //associa o valor sexo a 6a interrogação

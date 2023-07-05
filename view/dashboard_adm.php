@@ -44,6 +44,8 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/style_adm.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="../favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../favicon_io/favicon-32x32.png">
@@ -89,6 +91,28 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
         }
     }
     </script>
+        <script>
+        function exibirAlerta(tipo, mensagem) {
+            let title;
+            if (tipo === 'success') {
+                if (mensagem === 'Login realizado com Sucesso!') {
+                    title = 'Login realizado com Sucesso!';
+                } else if (mensagem === 'Usuário realizado com Sucesso!') {
+                    title = 'Usuário realizado com Sucesso!';
+                } else if (mensagem === 'Cadastro realizado com Sucesso!') {
+                    title = 'Cadastro realizado com Sucesso!';
+                }
+            } else {
+                title = 'OPS! Email e/ou Senha Inválidos';
+            }
+
+            Swal.fire({
+                icon: tipo,
+                title: title,
+                text: mensagem,
+            });
+        }
+    </script>
 </head>
 <body onload="definirConteudoInicial()">
     <header class="main_header">
@@ -126,6 +150,55 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
     <header>
         <h1>Dashboard</h1>
     </header>
+    <?php
+        if (isset($_GET['msg'])) {
+            if ($_GET['msg'] === 'success') {
+                $tipo = 'success';
+                if ($_GET['action'] === 'alterar') {
+                    $mensagem = 'Atualização feita com Sucesso!';
+                } elseif ($_GET['action'] === 'excluir') {
+                    $mensagem = 'Usuário excluido com Sucesso!';
+                } elseif ($_GET['action'] === 'cadastro') {
+                    $mensagem = 'Cadastro realizado com Sucesso!';
+                }elseif($_GET['action'] === 'login'){
+                    $mensagem = 'Login realizado com Sucesso!';
+                }
+            }else if ($_GET['msg'] === 'warning') {
+                $tipo = 'warning';
+                if ($_GET['action'] === 'perfil') {
+                    $mensagem = 'OPS! É necessário fazer Login';
+                }
+            }else if ($_GET['msg'] === 'error') {
+                $tipo = 'error';
+                if ($_GET['action'] === 'login') {
+                    $mensagem = 'ERRO! Email e/ou Senha Inválidos';
+                } elseif ($_GET['action'] === 'alterar') {
+                    $mensagem = 'ERRO ao altera Usuário!';
+                } elseif ($_GET['action'] === 'cadastro') {
+                    $mensagem = 'ERRO ao altera Usuário!';
+                }elseif ($_GET['action'] === 'excluir') {
+                    $mensagem = 'ERRO ao excluir Usuário!';
+                }
+            }
+        } else {
+            // $_GET['msg'] não está definida
+            $tipo = null;
+            $mensagem = null;
+        }
+    ?>
+    <script>
+        function exibirAlerta(tipo, titulo, mensagem) {
+            Swal.fire({
+                icon: tipo,
+                title: titulo,
+                text: mensagem,
+            });
+        }
+        // Verifica se o tipo e a mensagem estão definidos e chama a função exibirAlerta
+        <?php if ($tipo && $mensagem): ?>
+        exibirAlerta("<?php echo $tipo; ?>", "<?php echo $mensagem; ?>");
+        <?php endif; ?>
+    </script>
     <nav class="sidebar">
         <div class='painel_adm'>
             <div class="menu-item ativo" id="botao-dashboard">
@@ -151,6 +224,9 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
                 if (empty($pesquisa_usu)) {
                     echo '<p>Nenhum usuário encontrado!</p>';
                 } else {
+                    echo '<script>';
+                    echo "exibirAlerta('success', 'Usuário encontrado com sucesso!');";
+                    echo '</script>';
                     ?>
                     <div class="conteudo" id="usuario">
                         <h2>Usuários</h2>
@@ -184,8 +260,8 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
                                     <td><?= $usuarioFetch->getEmail() ?></td>
                                     <td><?= $usuarioFetch->getCpf()?></td>
                                     <td><?= $usuarioFetch->getTelefone()?></td>
-                                    <td><?= $usuarioFetch->getSexo()?></td>
                                     <td><?= $usuarioFetch->getDt_nascimento()?></td>
+                                    <td><?= $usuarioFetch->getSexo()?></td>
                                     <td><?= $usuarioFetch->getSituacao()?></td>
                                 </tr>
                                 <?php } ?>
@@ -216,7 +292,7 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
                                     <td><?= $usuarioFetch->getObs()?></td>
                                     <td>
                                         <a href="alterar_adm_usu.php?id_usuario=<?= $usuarioFetch->getId_usuario()?>" title="ALTERAR"><i class="fa-solid fa-pen-to-square"></i></a>
-                                        <a href="../control/excluir.php?id_usuario=<?= $usuarioFetch->getId_usuario()?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
+                                        <a href="../control/excluir_adm.php?id_usuario=<?= $usuarioFetch->getId_usuario()?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -290,7 +366,7 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
                                 <td><?= $usuarioFetch["obs"] ?></td>
                                 <td>
                                     <a href="alterar_adm_usu.php?id_usuario=<?= $usuarioFetch["id_usuario"]?>" title="ALTERAR"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="../control/excluir.php?id_usuario=<?= $usuarioFetch["id_usuario"]?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
+                                    <a href="../control/excluir_adm.php?id_usuario=<?= $usuarioFetch["id_usuario"]?>" title="EXCLUIR" onclick="return confirm('Deseja excluir esse usuário?')"><i class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                             <?php } ?>
