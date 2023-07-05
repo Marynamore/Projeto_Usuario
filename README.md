@@ -30,14 +30,14 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 
 Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local:
 
-1.  :small_red_diamond: Ao instalar o XAMPP, um diretório será criado no seu computador para armazenar todos os arquivos e componentes.
+1.  :small_blue_diamond: Ao instalar o XAMPP, um diretório será criado no seu computador para armazenar todos os arquivos e componentes.
       O diretório padrão é "C:\xampp" no Windows e "/opt/lampp" no Linux.
 2.  :small_red_diamond: Dentro desse diretório, você encontrará subdiretórios para cada componente, como "apache" para o servidor web Apache, "php" para o interpretador PHP e "mysql" para o banco de dados MySQL/MariaDB, "htdocs" é onde você deve colocar seus arquivos PHP para que possam ser executados pelo servidor we.
-3.  :small_red_diamond: Clone este repositório em seu ambiente local.
-4.  :small_red_diamond: Configure as informações de conexão com o banco de dados no arquivo `config.php`.
-5.  :small_red_diamond: Importe o arquivo `database.sql` para criar a estrutura do banco de dados.
-6.  :small_red_diamond: Depois de instalar e configurar o XAMPP, inicie o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP.
-7.  :small_red_diamond: Acesse "http://localhost" em seu navegador para acessar seus arquivos PHP.
+3.  :small_blue_diamond: Clone este repositório em seu ambiente local.
+4.  :small_blue_diamond: Configure as informações de conexão com o banco de dados no arquivo `config.php`.
+5.  :small_blue_diamond: Importe o arquivo `database.sql` para criar a estrutura do banco de dados.
+6.  :small_blue_diamond: Depois de instalar e configurar o XAMPP, inicie o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP.
+7.  :small_blue_diamond: Acesse "http://localhost" em seu navegador para acessar seus arquivos PHP.
 
 ### :technologist: Se você preferir executar um servidor PHP embutido diretamente no terminal Linux
 1. **Verifique se o PHP está instalado:**
@@ -57,8 +57,7 @@ Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local
       OBS:  Você também pode especificar um arquivo PHP específico para ser executado no servidor embutido, fornecendo o caminho para o arquivo após a porta!
      ```shel
        php -S localhost:8000 arquivo.php
-      ```
-:---:
+      ``` :---:
 
 ## Contribuição
 
