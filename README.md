@@ -25,7 +25,6 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 -  **PHP:** É necessário ter o interpretador PHP instalado;
 - **XAMPP:** Ele fornece um servidor web Apache para executar seus scripts, o interpretador PHP, o banco de dados MySQL e o servidor de banco de dados MariaDB, juntamente com outras ferramentas e utilitários.
 
-
 ## Configuração do servidor
 
 Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local:
@@ -39,6 +38,9 @@ Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local
 6.  :small_blue_diamond: Depois de instalar e configurar o XAMPP, inicie o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP.
 7.  :small_blue_diamond: Acesse "http://localhost" em seu navegador para acessar seus arquivos PHP.
 
+<br><br>
+
+*** 
 ### :technologist: Se você preferir executar um servidor PHP embutido diretamente no terminal Linux
 1. **Verifique se o PHP está instalado:**
    - :small_blue_diamond: Digite o seguinte comando:
@@ -57,7 +59,8 @@ Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local
       OBS:  Você também pode especificar um arquivo PHP específico para ser executado no servidor embutido, fornecendo o caminho para o arquivo após a porta!
      ```shel
        php -S localhost:8000 arquivo.php
-      ``` :---:
+      ``` 
+*** 
 
 ## Contribuição
 
