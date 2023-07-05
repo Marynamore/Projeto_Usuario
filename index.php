@@ -219,7 +219,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Cliente</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para clientes.</p>
                     <br>
-                    <a href="" class="btn" onclick="fundPageCli()">Acesse</a>
+                    <a href="" class="btn" onclick="fundPageCli()">Confira</a>
                 </div>
             </aside>
             <aside>
@@ -228,7 +228,7 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Moderador</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para moderadores.</p>
                     <br>
-                    <a href="" class="btn" onclick="fundPageMode()">Acesse</a>
+                    <a href="" class="btn" onclick="fundPageMode()">Confira</a>
                 </div>
             </aside>
             <aside>
@@ -237,13 +237,36 @@ if (isset($_SESSION["id_usuario"])) {
                     <p class="category">Área do Administrador</p><br>
                     <p>Acesse aqui os recursos exclusivos disponíveis para administradores.</p>
                     <br>
-                    <a href="./view/dashboard_adm.php" class="btn">Acesse</a>
+                    <a href="./view/dashboard_adm.php" class="btn">Confira</a>
                 </div>
             </aside>
         </section>
     </main>
     <hr>
     <footer>
+        <section class="main_optin_footer">
+            <header class="main_optin_header">
+                <h1>Confira alguns Recursos de PHP</h1>
+            </header>
+            <aside>
+                <div class="main_optin_footer_content">
+                    <h2>Revisões das aulas de PHP</h2>
+                    <a href="https://github.com/Marynamore/Revisao_PHP" target="_blank" class="btn">Acesse</a>
+                </div>    
+            </aside>
+            <aside>
+                <div class="main_optin_footer_content">
+                    <h2>Classe Usuário PHP em POO</h2>
+                    <a href="https://github.com/Marynamore/ClasseUsuarioPHP" target="_blank" class="btn">Acesse</a>
+                </div> 
+            </aside>
+            <aside>
+                <div class="main_optin_footer_content">
+                    <h2>Trabalho em PHP com base nos pilares da POO</h2>
+                    <a href="https://github.com/Marynamore/Trabalho-PHP-OO" target="_blank" class="btn">Acesse</a>
+                </div>
+            </aside>
+        </section>
         <section class="main_footer">
             <article class="main_footer_our_pages">
                 <header>
@@ -273,7 +296,7 @@ if (isset($_SESSION["id_usuario"])) {
             </article>
         </section>
         <hr>
-        <p>&copy; 2023 Meu Projeto. Todos os direitos reservados.</p>
+        <p class="copy">&copy; 2023 Meu Projeto. Todos os direitos reservados.</p>
     </footer>
     <script src="./js/script.js"></script>
 </body>
