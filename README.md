@@ -30,15 +30,15 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local:
 
 1.  :small_blue_diamond: Ao instalar o XAMPP, um diretório será criado no seu computador para armazenar todos os arquivos e componentes.
-      O diretório padrão é "C:\xampp" no Windows e "/opt/lampp" no Linux.
-2.  :small_blue_diamond: Dentro desse diretório, você encontrará subdiretórios para cada componente, como "apache" para o servidor web Apache, "php" para o interpretador PHP e "mysql" para o banco de dados MySQL/MariaDB, "htdocs" é onde você deve colocar seus arquivos PHP para que possam ser executados pelo servidor we.
+      O diretório padrão é `C:\xampp` no Windows e `/opt/lampp` no Linux.
+2.  :small_blue_diamond: Dentro desse diretório, você encontrará subdiretórios para cada componente, como `apache` para o servidor web Apache, `php` para o interpretador PHP e `mysql` para o banco de dados MySQL/MariaDB, `htdocs` é onde você deve colocar seus arquivos PHP para que possam ser executados pelo servidor web.
 3.  :small_blue_diamond: Clone este repositório em seu ambiente local.
-4.  :small_blue_diamond: Configure as informações de conexão com o banco de dados no arquivo `config.php`.
-5.  :small_blue_diamond: Importe o arquivo `database.sql` para criar a estrutura do banco de dados.
+4.  :small_blue_diamond: Configure as informações de conexão com o banco de dados no arquivo `conexao.php`que está  no diretório `model/`.
+5.  :small_blue_diamond: Importe o arquivo `projeto_usu.sql` que está  no diretório `sql/projeto_usu.sql` para criar a estrutura do banco de dados.
 6.  :small_blue_diamond: Depois de instalar e configurar o XAMPP, inicie o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP.
-7.  :small_blue_diamond: Acesse "http://localhost" em seu navegador para acessar seus arquivos PHP.
+7.  :small_blue_diamond: Acesse `http://localhost` em seu navegador para acessar seus arquivos PHP.
 
-<br><br>
+<br>
 
 *** 
 ### :technologist: Se você preferir executar um servidor PHP embutido diretamente no terminal Linux
@@ -61,9 +61,8 @@ Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local
        php -S localhost:8000 arquivo.php
       ``` 
 *** 
-<br><br>
 
-
+<br>
 
 ## Contribuição
 
