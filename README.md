@@ -26,20 +26,32 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 - **PHP:** É necessário ter o interpretador PHP instalado;
 - **XAMPP:** Ele fornece um servidor web Apache para executar seus scripts, o interpretador PHP, o banco de dados MySQL e o servidor de banco de dados MariaDB, juntamente com outras ferramentas e utilitários.
 - **Configuração do servidor:**
-  - Ao instalar o XAMPP, ele criará um diretório em seu computador onde todos os arquivos e componentes estarão localizados. 
-Geralmente, o diretório padrão para instalação é "C:\xampp" no Windows e "/opt/lampp" no Linux;
-  - Dentro desse diretório, você encontrará subdiretórios para cada componente, como "apache" para o servidor web Apache, "php" para o interpretador PHP e "mysql" para o banco de dados MySQL/MariaDB. 
-Você também encontrará um diretório chamado "htdocs", que é onde você deve colocar seus arquivos PHP para que eles possam ser executados pelo servidor web;
-  - Depois de instalar e configurar o XAMPP, você pode iniciar o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP. Você pode acessar seu ambiente de desenvolvimento PHP digitando "http://localhost" em seu navegador, o que abrirá a página inicial do XAMPP e permitirá que você acesse seus arquivos PHP.
+  - Ao instalar o XAMPP, um diretório será criado no seu computador para armazenar todos os arquivos e componentes.
+      O diretório padrão é "C:\xampp" no Windows e "/opt/lampp" no Linux.
+  - Dentro desse diretório, você encontrará subdiretórios para cada componente, como "apache" para o servidor web Apache, "php" para o interpretador PHP e "mysql" para o banco de dados MySQL/MariaDB.
+  - O diretório "htdocs" é onde você deve colocar seus arquivos PHP para que possam ser executados pelo servidor web.
+  - Depois de instalar e configurar o XAMPP, inicie o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP.
+  - Acesse "http://localhost" em seu navegador para acessar seus arquivos PHP.
 
 ## Se você preferir executar um servidor PHP embutido diretamente no terminal Linux
 1. **Verifique se o PHP está instalado:**
    - Digite o seguinte comando:
      ```shel
      php -v
+      ```
+2. **Inicie o servidor embutido:**
+   - No terminal navegue até o diretório onde você salvou o arquivo PHP: (utilize o comando cd)
+     ```shel
+       php -S localhost:8000
+      ```
+     OBS:  Você pode substituir "8000" por qualquer outra porta de sua preferência.
+     
+3. **Acesse o servidor web:**
+    - Abra o seu navegador e digite http://localhost:8000 na barra de endereço.
+      OBS:  Você também pode especificar um arquivo PHP específico para ser executado no servidor embutido, fornecendo o caminho para o arquivo após a porta!
+   ```shel
+     php -S localhost:8000 arquivo.php
     ```
-
-
 
 ## Configuração
 
