@@ -32,11 +32,16 @@ Geralmente, o diretório padrão para instalação é "C:\xampp" no Windows e "/
 Você também encontrará um diretório chamado "htdocs", que é onde você deve colocar seus arquivos PHP para que eles possam ser executados pelo servidor web;
   - Depois de instalar e configurar o XAMPP, você pode iniciar o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP. Você pode acessar seu ambiente de desenvolvimento PHP digitando "http://localhost" em seu navegador, o que abrirá a página inicial do XAMPP e permitirá que você acesse seus arquivos PHP.
 
+## Se você preferir executar um servidor PHP embutido diretamente no terminal Linux
+1. **Verifique se o PHP está instalado:**
+   - Digite o seguinte comando:
+     ```shel
+     php -v
+    ```
 
-## Configuração do servidor
 
 
-
+## Configuração
 
 Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local:
 
