@@ -16,14 +16,27 @@ O sistema oferece as seguintes funcionalidades:
 
 - [x] Operações CRUD: Os usuários podem realizar operações de criação, leitura, atualização e exclusão de informações no banco de dados.
 
+- [x] Os pilares do Banco de Dados são aplicados para garantir consistência, integridade referencial e eficiência nas consultas.
+
 ## Requisitos
 
 Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desenvolvimento:
 
-- PHP [versão]
-- [Outras dependências ou extensões necessárias]
+- **IDE:** escolha um editor de texto simples para escrever seus scripts PHP;
+- **PHP:** É necessário ter o interpretador PHP instalado;
+- **XAMPP:** Ele fornece um servidor web Apache para executar seus scripts, o interpretador PHP, o banco de dados MySQL e o servidor de banco de dados MariaDB, juntamente com outras ferramentas e utilitários.
+- **Configuração do servidor:**
+  - Ao instalar o XAMPP, ele criará um diretório em seu computador onde todos os arquivos e componentes estarão localizados. 
+Geralmente, o diretório padrão para instalação é "C:\xampp" no Windows e "/opt/lampp" no Linux;
+  - Dentro desse diretório, você encontrará subdiretórios para cada componente, como "apache" para o servidor web Apache, "php" para o interpretador PHP e "mysql" para o banco de dados MySQL/MariaDB. 
+Você também encontrará um diretório chamado "htdocs", que é onde você deve colocar seus arquivos PHP para que eles possam ser executados pelo servidor web;
+  - Depois de instalar e configurar o XAMPP, você pode iniciar o servidor Apache e o servidor MySQL/MariaDB para começar a desenvolver e testar seus scripts PHP. Você pode acessar seu ambiente de desenvolvimento PHP digitando "http://localhost" em seu navegador, o que abrirá a página inicial do XAMPP e permitirá que você acesse seus arquivos PHP.
 
-## Configuração
+
+## Configuração do servidor
+
+
+
 
 Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local:
 
