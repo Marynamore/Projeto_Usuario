@@ -132,7 +132,7 @@ $paginaInicial = isset($_SESSION['pagina_inicial']) ? $_SESSION['pagina_inicial'
                     if ($usuarioFoto) {
                         if ($id_perfil == 1) {
                             $foto = $usuarioFoto['foto'] ?? "";
-                            echo '<a href="../view/dashboard_adm.php">';
+                            echo '<a href="perfil_usu.php">';
                             if ($foto) {
                                 echo '<img src="../assets/pessoas/'.$foto.'" alt="Foto do Cliente">';
                             } else {
