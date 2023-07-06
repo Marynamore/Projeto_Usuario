@@ -57,8 +57,14 @@ Siga as etapas abaixo para configurar e executar o projeto em seu ambiente local
        php -S localhost:8000 arquivo.php
       ``` 
 *** 
-
 <br>
+
+## :joystick: Assista ao vídeo explicativo do Projeto Usuário
+
+[![Projeto Usuário](https://link-para-a-miniatura-do-video.jpg)](https://github.com/Marynamore/Projeto_Usuario/assets/86386469/34fb0534-e9da-4142-956e-290c6a58e479)
+
+
+
 
 ## Contribuição
 
