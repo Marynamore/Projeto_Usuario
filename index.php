@@ -154,7 +154,7 @@ if (isset($_SESSION["id_usuario"])) {
                 } elseif ($_GET['action'] === 'alterar') {
                     $mensagem = 'ERRO ao altera Usuário!';
                 } elseif ($_GET['action'] === 'cadastro') {
-                    $mensagem = 'ERRO ao altera Usuário!';
+                    $mensagem = 'ERRO ao cadastrar Usuário!';
                 }elseif ($_GET['action'] === 'excluir') {
                     $mensagem = 'ERRO ao excluir Usuário!';
                 } else {
