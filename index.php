@@ -139,7 +139,7 @@ if (isset($_SESSION["id_usuario"])) {
                 } elseif ($_GET['action'] === 'alterar') {
                     $mensagem = 'OPS! Erro ao altera Usuário!';
                 } elseif ($_GET['action'] === 'cadastro') {
-                    $mensagem = 'OPS! Erro ao altera Usuário!';
+                    $mensagem = 'OPS! Erro ao cadastrar Usuário!';
                 }elseif ($_GET['action'] === 'excluir') {
                     $mensagem = 'OPS! Erro ao excluir Usuário!';
                 } else {
